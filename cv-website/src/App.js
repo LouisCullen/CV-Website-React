@@ -10,13 +10,14 @@ function App() {
       <Container 
         fluid 
         style={{ 
-          background: "linear-gradient(to bottom, #272c36, #353b48 7%)", 
-          height: "100vh",
+          background: "#353b48", 
+          minHeight: "100vh",
           scrollSnapType: "y proximity",
           overflowY: "auto",
           scrollbarWidth: 0,
           overflowStyle: "none",
-          padding: 0
+          padding: 0,
+          position: "fixed"
         }}
       >
         <Hero />
