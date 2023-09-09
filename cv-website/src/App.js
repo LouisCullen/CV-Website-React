@@ -2,6 +2,7 @@ import { Container } from 'react-bootstrap';
 import './App.css';
 import GlobalNavbar from './components/GlobalNavbar';
 import Hero from './components/Hero';
+import Skills from './components/Skills';
 
 function App() {
   return (
@@ -16,12 +17,12 @@ function App() {
           overflowY: "auto",
           scrollbarWidth: 0,
           overflowStyle: "none",
-          padding: 0,
-          position: "fixed"
+          padding: 0
         }}
       >
         <Hero />
         {/* <Hero /> */}
+        <Skills />
       </Container>
     </div>
   );

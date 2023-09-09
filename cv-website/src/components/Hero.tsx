@@ -21,6 +21,7 @@ const Hero = () => {
                 padding: 0,
                 paddingTop: "10vh",
                 background: "linear-gradient(to bottom, #272c36, #353b48 7%)", 
+                paddingBottom: "25vh"
             }}
         >
             <div style={{ height: "600px", maxWidth: "1000px", width: "100%", position: "relative" }}>
@@ -41,7 +42,7 @@ const Hero = () => {
                         opacity: transition ? 100 : 0,
                         transitionDuration: "1.2s",
                         transitionDelay: "1.2s",
-                        transitionTimingFunction: "ease-in",
+                        transitionTimingFunction: "ease-in"
                     }}
                 >
                     <h1><b>I'm Louis, a Computer Science student based in Manchester/London</b></h1>

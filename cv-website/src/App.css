@@ -40,6 +40,6 @@
   }
 }
 
-p, h1 {
+p, h1, h2, h3, svg, ul {
   color: #bdc3c7 !important;
 }
