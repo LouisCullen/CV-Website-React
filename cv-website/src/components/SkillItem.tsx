@@ -1,61 +1,39 @@
-import React, { useRef, useState } from "react";
-import { FaTimes } from "react-icons/fa";
+import React from "react";
 
-interface props {
-    index: number;
-    icon: JSX.Element;
+interface popover {
     name: string;
     uses: string[];
-    salt: number;
+}
+
+interface props {
+    icon: JSX.Element;
+    popover: popover;
+    setPopover: any;
+    popoverRef: any;
 }
 
 const SkillItem = ({
-    index,
     icon,
-    name,
-    uses,
-    salt
+    popover,
+    setPopover,
+    popoverRef
 }: props) => {
-    const [toggle, setToggle] = useState<boolean>(false);
-    const popoverRef = useRef<HTMLDivElement>(null);
+    
 
     return (
-        <>
-        <div
-            style={{
-                position: "relative",
-                left: `${salt}vw`
-            }}
-            onClick={() => {
-                setToggle(true);
-                popoverRef.current?.focus();
-            }}
-        >
-            {icon}
+        <div style={{ display: "flex", padding: "max(30px, 3vw)", position: "relative", justifyContent: "center" }}>
+            <div
+                style={{
+                    position: "relative",
+                }}
+                onClick={() => {
+                    setPopover(popover);
+                    popoverRef.current?.focus();
+                }}
+            >
+                {icon}
+            </div>
         </div>
-        <div
-            ref={popoverRef}
-            style={{
-                maxHeight: toggle ? "100vh" : 0,
-                overflow: "hidden",
-                background: "#16181e",
-                position: "absolute",
-                padding: toggle ? "2em" : 0,
-                transitionDuration: "1s",
-            }}
-            tabIndex={0}
-            onBlur={() => setToggle(false)}
-            onFocus={() => console.log("focused")}
-        >
-            <FaTimes style={{ position: "absolute", right: "1em", top: "1em", cursor: "pointer"}} onClick={() => setToggle(false)}/>
-            <h2 style={{ fontWeight: "bold" }}>{name}</h2>
-            <ul style={{ textAlign: "left" }}>
-                {uses.map((use, i) => (
-                    <li key={i}>{use}</li>
-                ))}
-            </ul>
-        </div>
-        </>
     )
 }
 
