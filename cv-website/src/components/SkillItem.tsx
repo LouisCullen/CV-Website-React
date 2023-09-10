@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface popover {
     name: string;
@@ -10,52 +10,57 @@ interface props {
     popover: popover;
     globalPopover: string | null;
     setPopover: any;
-    popoverRef: any;
 }
 
 const SkillItem = ({
     icon,
     popover,
     globalPopover,
-    setPopover,
-    popoverRef
+    setPopover
 }: props) => {
     const [height, setHeight] = useState<string>("min(200px,18vw)");
     const [width, setWidth] = useState<string>("min(200px,18vw)");
     const [padding, setPadding] = useState<string>("max(30px, 3vw)");
+    const [order, setOrder] = useState<number>(0);
+    const popoverRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (!globalPopover) {
             setHeight("min(150px,15vw)");
             setWidth("min(150px,15vw)");
             setPadding("max(30px, 3vw)");
+            setOrder(0);
         } else if (globalPopover === popover.name) {
-            setHeight("min(300px,27vw)");
-            setWidth("min(300px,27vw)");
+            setHeight("100vh");
+            setWidth("300px");
             setPadding("max(45px, 4.5vw)");
+            setOrder(0);
         } else {
             setHeight("min(100px,4.5vw)");
             setWidth("min(100px,4.5vw)");
             setPadding("max(15px, 1.5vw)");
+            setOrder(0)
         }
     }, [globalPopover]);
 
 
     return (
         <div 
+            ref={popoverRef}
             style={{ 
                 display: "flex", 
                 margin: padding,
                 position: "relative", 
-                // justifyContent: "center", 
+                // alignItems: "center", 
                 maxHeight: height,
                 maxWidth: width,
-                height: "100vh",
-                width: "100vw",
                 transitionDuration: "1s",
                 overflow: "hidden",
-                flexDirection: "column"
+                flexDirection: "column",
+                order: order
             }}
+            onBlur={() => setPopover(null)}
+            onFocus={() => console.log("focus")}
         >
             <div
                 style={{

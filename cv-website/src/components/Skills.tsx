@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
-import { FaAws, FaCss3Alt, FaJava, FaJs, FaReact, FaTimes } from "react-icons/fa";
+import { FaAws, FaCss3Alt, FaJava, FaJs, FaReact } from "react-icons/fa";
 import SkillItem from "./SkillItem";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const skillsArray = [
     {
@@ -50,7 +50,6 @@ const skillsArray = [
 ]
 
 const Skills = () => {
-    const popoverRef = useRef<HTMLDivElement>(null);
     const [popover, setPopover] = useState<string|null>(null);
     
     return (
@@ -78,7 +77,6 @@ const Skills = () => {
                         popover={{ name: skill.name, uses: skill.uses }}
                         globalPopover={popover}
                         setPopover={setPopover}
-                        popoverRef={popoverRef}
                     />
                 )}
             </div>
