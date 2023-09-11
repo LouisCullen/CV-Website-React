@@ -21,7 +21,8 @@ const Hero = () => {
                 padding: 0,
                 paddingTop: "10vh",
                 background: "linear-gradient(to bottom, #272c36, #353b48 7%)", 
-                paddingBottom: "10vw"
+                paddingBottom: "10vw",
+                minHeight: "80vh"
             }}
         >
             <div style={{ maxHeight: "600px", height: "100vw", maxWidth: "1000px", width: "100%", position: "relative" }}>

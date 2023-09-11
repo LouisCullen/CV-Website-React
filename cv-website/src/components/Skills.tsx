@@ -1,7 +1,8 @@
 import { Container } from "react-bootstrap";
-import { FaAws, FaCss3Alt, FaJava, FaJs, FaReact } from "react-icons/fa";
+import { FaAws, FaBootstrap, FaCss3Alt, FaJava, FaJenkins, FaJs, FaNode, FaPython, FaReact } from "react-icons/fa";
 import SkillItem from "./SkillItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 const skillsArray = [
     {
@@ -14,11 +15,11 @@ const skillsArray = [
         ]
     },
     {
-        icon: FaJava,
-        name: "Java",
+        icon: FaNode,
+        name: "NodeJS",
         uses: [
-            "Internship",
-            "University projects"
+            "7-month part-time role",
+            "Personal projects"
         ]
     },
     {
@@ -30,8 +31,24 @@ const skillsArray = [
         ]
     },
     {
+        icon: FaJava,
+        name: "Java",
+        uses: [
+            "Internship",
+            "University projects"
+        ]
+    },
+    {
+        icon: FaPython,
+        name: "Python",
+        uses: [
+            "Personal projects",
+            "University projects"
+        ]
+    },
+    {
         icon: FaAws,
-        name: "Amazon Web Services",
+        name: "AWS",
         uses: [
             "Internship",
             "Personal projects"
@@ -47,11 +64,28 @@ const skillsArray = [
             "University projects"
         ]
     },
+    {
+        icon: FaBootstrap,
+        name: "Bootstrap",
+        uses: [
+            "Personal projects",
+            "University projects"
+        ]
+    },
+    {
+        icon: FaJenkins,
+        name: "Jenkins",
+        uses: [
+            "Internship",
+            "University projects",
+            "Shadow cloud architect"
+        ]
+    },
 ]
 
 const Skills = () => {
     const [popover, setPopover] = useState<string|null>(null);
-    
+
     return (
         <Container
             style={{ 
@@ -68,12 +102,14 @@ const Skills = () => {
                 display: "flex",
                 flexDirection: "row",
                 flexWrap: "wrap",
-                justifyContent: "center"
+                justifyContent: "center",
+                width: "100%",
+                paddingTop: "5vh"
             }}>
                 {skillsArray.map((skill, i) => 
                     <SkillItem
                         key={i}
-                        icon={<skill.icon style={{ width: "min(150px,15vw,100%)", height: "100%", cursor: "pointer" }} />}
+                        icon={<skill.icon style={{ width: "100%", height: "100%", cursor: "pointer" }} />}
                         popover={{ name: skill.name, uses: skill.uses }}
                         globalPopover={popover}
                         setPopover={setPopover}

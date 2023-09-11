@@ -23,6 +23,10 @@ function App() {
         <Hero />
         {/* <Hero /> */}
         <Skills />
+        <Container
+          fluid
+          style={{ height: "100vh" }}
+        ></Container>
       </Container>
     </div>
   );

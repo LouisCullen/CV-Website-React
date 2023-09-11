@@ -27,13 +27,15 @@ const GlobalNavbar = () => {
                     className="navbar-brand brand justify-content-start" 
                     style={{
                         paddingTop: "20px",
-                        paddingBottom: "25px",
+                        paddingBottom: "20px",
                         paddingRight: "25px",
                         margin: 0,
                         position: "relative",
                         top: transition ? "0" : "-100px",
                         transitionDuration: "0.5s",
-                        transitionTimingFunction: "ease-in-out"
+                        transitionTimingFunction: "ease-in-out",
+                        display: "flex",
+                        alignItems: "center"
                     }}
                 >
                     <img src={require("../logo.png")} alt="Logo" style={{ maxWidth: "510px", width:"60vw" }}/>

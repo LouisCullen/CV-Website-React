@@ -1,8 +1,88 @@
+import { useWindowSize } from "@uidotdev/usehooks";
 import React, { useEffect, useRef, useState } from "react";
 
 interface popover {
     name: string;
     uses: string[];
+}
+
+interface internalProps {
+    icon: JSX.Element;
+    popover: popover;
+    globalPopover: string | null;
+    setPopover: any;
+    height: string;
+    width: string;
+    padding: string;
+    iconCover: string;
+    justifyContent: string;
+    mobile: boolean;
+}
+
+const SkillItemInternals = ({
+    icon,
+    popover,
+    globalPopover,
+    setPopover,
+    height,
+    width,
+    padding,
+    iconCover,
+    justifyContent,
+    mobile
+}: internalProps) => {
+
+    return (
+        <div 
+            style={{ 
+                display: "flex", 
+                position: "relative", 
+                maxHeight: height,
+                maxWidth: width,
+                transitionDuration: "1s",
+                overflow: "hidden",
+                flexDirection: mobile ? "row" : "column",
+                width: "100%",
+                margin: mobile ? 0 : padding,
+                justifyContent: justifyContent
+            }}
+        >
+            <div
+                style={{
+                    position: "relative",
+                    flexShrink: 0,
+                    padding: (iconCover === "40%") ? "5%" : 0,
+                    width: iconCover
+                }}
+                onClick={() => {
+                    setPopover(popover.name);
+                }}
+                // onMouseLeave={() => {
+                //     setPopover(null);
+                // }}
+            >
+                {icon}
+            </div>
+            <div 
+                style={{ 
+                    // width: "min(300px,27vw)", 
+                    display: "flex", 
+                    alignItems: "center", 
+                    flexDirection: "column",
+                    paddingTop: mobile ? 0 : "5%",
+                    justifyContent: "center",
+                    marginLeft: mobile ? "2%" : 0
+                }}
+            >
+                <h2 style={{ fontWeight: "bold" }}>{popover.name}</h2>
+                <ul style={{ textAlign: "center", listStylePosition: "inside", padding: 0, margin: 0, overflow: "hidden", whiteSpace: "nowrap" }}>
+                    {popover.uses.map((use, index) => 
+                        <li key={index}>{use}</li>
+                    )}
+                </ul>
+            </div>
+        </div>
+    )
 }
 
 interface props {
@@ -21,75 +101,83 @@ const SkillItem = ({
     const [height, setHeight] = useState<string>("min(200px,18vw)");
     const [width, setWidth] = useState<string>("min(200px,18vw)");
     const [padding, setPadding] = useState<string>("max(30px, 3vw)");
-    const [order, setOrder] = useState<number>(0);
-    const popoverRef = useRef<HTMLDivElement>(null);
+    const [justifyContent, setJustifyContent] = useState<string>("start");
+    const [iconCover, setIconCover] = useState<"100%"|"40%">("100%");
+    const windowSize = useWindowSize();
+    const [mobile, setMobile] = useState<boolean>(false);
+    
+    useEffect(() => {
+        if (!windowSize.width) return;
+        setMobile(windowSize.width < 800)
+    }, [windowSize.width]);
 
     useEffect(() => {
         if (!globalPopover) {
+            setIconCover("100%");
             setHeight("min(150px,15vw)");
             setWidth("min(150px,15vw)");
             setPadding("max(30px, 3vw)");
-            setOrder(0);
+            setJustifyContent("start");
+            // setOrder(0);
         } else if (globalPopover === popover.name) {
-            setHeight("100vh");
-            setWidth("300px");
-            setPadding("max(45px, 4.5vw)");
-            setOrder(0);
+            setIconCover(mobile ? "40%" : "100%")
+            // setOrder(mobile ? order+1 : 0);
+            setHeight(mobile ? "200px" : "100vh");
+            setWidth(mobile ? "100vw" : "200px");
+            setJustifyContent(mobile ? "center" : "start");
+            // setPadding("max(45px, 4.5vw)");
         } else {
-            setHeight("min(100px,4.5vw)");
-            setWidth("min(100px,4.5vw)");
+            setIconCover("100%");
+            setHeight("min(100px,10vw)");
+            setWidth("min(100px,10vw)");
             setPadding("max(15px, 1.5vw)");
-            setOrder(0)
+            setJustifyContent("start");
+            // setTimeout(() => {
+            //     setOrder(0);
+            // }, 1000);
         }
-    }, [globalPopover]);
-
+    }, [globalPopover, mobile]);
 
     return (
-        <div 
-            ref={popoverRef}
-            style={{ 
-                display: "flex", 
-                margin: padding,
-                position: "relative", 
-                // alignItems: "center", 
+        mobile ? (
+            <div
+            style={{
                 maxHeight: height,
                 maxWidth: width,
-                transitionDuration: "1s",
-                overflow: "hidden",
-                flexDirection: "column",
-                order: order
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                margin: padding,
             }}
-            onBlur={() => setPopover(null)}
-            onFocus={() => console.log("focus")}
-        >
-            <div
-                style={{
-                    position: "relative",
-                }}
-                onClick={() => {
-                    setPopover(popover.name);
-                    popoverRef.current?.focus();
-                }}
             >
-                {icon}
+                <SkillItemInternals
+                    icon={icon}
+                    popover={popover}
+                    globalPopover={globalPopover}
+                    setPopover={setPopover}
+                    height={height}
+                    width={width}
+                    padding={padding}
+                    iconCover={iconCover}
+                    justifyContent={justifyContent}
+                    mobile={mobile}
+                />
             </div>
-            <div 
-                style={{ 
-                    width: "min(300px,27vw)", 
-                    display: "flex", 
-                    alignItems: "center", 
-                    flexDirection: "column",
-                    paddingTop: "5%"
-                }}
-            >
-                <h2>{popover.name}</h2>
-                <ul style={{ textAlign: "left" }}>
-                    {popover.uses.map((use, index) => 
-                        <li key={index}>{use}</li>
-                    )}
-                </ul>
-            </div>
-        </div>
+        ) : (
+            <SkillItemInternals
+                icon={icon}
+                popover={popover}
+                globalPopover={globalPopover}
+                setPopover={setPopover}
+                height={height}
+                width={width}
+                padding={padding}
+                iconCover={iconCover}
+                justifyContent={justifyContent}
+                mobile={mobile}
+            />
+        )
+
     )
 }
 
