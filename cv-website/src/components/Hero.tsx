@@ -41,12 +41,12 @@ const Hero = () => {
                         background: "linear-gradient(to left, rgba(53, 59, 72, 1) 25%, rgba(53, 59, 72, 0.5))",
                         padding: "1rem",
                         opacity: transition ? 100 : 0,
-                        transitionDuration: "1.2s",
-                        transitionDelay: "1.2s",
-                        transitionTimingFunction: "ease-in"
+                        transitionDuration: "1s",
+                        transitionDelay: "1s",
+                        transitionTimingFunction: "ease-in-out"
                     }}
                 >
-                    <h1><b>I'm Louis, a Computer Science student based in Manchester/London</b></h1>
+                    <h1><b>I'm Louis, a junior Software Developer based in Manchester/London</b></h1>
                 </div>
                 <img 
                     src={require("../images/profile.jpeg")} 
@@ -55,31 +55,14 @@ const Hero = () => {
                         maxHeight: "100%", 
                         maxWidth: "100%",
                         opacity: transition ? 100 : 0,
-                        transitionDuration: "0.6s",
-                        transitionTimingFunction: "ease-in",
+                        transitionDuration: "1s",
+                        transitionTimingFunction: "ease-in-out",
                         zIndex: 1,
                         position: "absolute",
                         top: 0,
                         left: 0
-                        // boxShadow: "rgba(0, 0, 0, 0.7) 5px 5px 5px 0px"
                     }}
                 />
-                {/* <img 
-                    src={require("../images/profile.jpeg")} 
-                    alt="profile" 
-                    style={{ 
-                        maxHeight: "100%", 
-                        maxWidth: "100%",
-                        opacity: transition ? 100 : 0,
-                        transitionDuration: "0.6s",
-                        transitionTimingFunction: "ease-in",
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        filter: "blur(min(10vw, 50px))",
-                        // boxShadow: "rgba(0, 0, 0, 0.7) 5px 5px 5px 0px"
-                    }}
-                /> */}
             </div>
         </Container>
     )

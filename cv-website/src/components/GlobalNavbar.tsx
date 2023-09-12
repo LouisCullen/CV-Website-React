@@ -32,7 +32,7 @@ const GlobalNavbar = () => {
                         margin: 0,
                         position: "relative",
                         top: transition ? "0" : "-100px",
-                        transitionDuration: "0.5s",
+                        transitionDuration: "0.6s",
                         transitionTimingFunction: "ease-in-out",
                         display: "flex",
                         alignItems: "center"
@@ -45,9 +45,9 @@ const GlobalNavbar = () => {
                         style={{ 
                             color: "#ecf0f1",
                             opacity: transition ? 100 : 0,
-                            transitionDuration: "1.2s",
-                            transitionDelay: "1.2s",
-                            transitionTimingFunction: "ease-in"
+                            transitionDuration: "1s",
+                            transitionDelay: "1s",
+                            transitionTimingFunction: "ease-in-out"
                         }} 
                     />
                 </Navbar.Toggle>

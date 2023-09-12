@@ -101,7 +101,7 @@ const Skills = () => {
           ([entry]) => {
             setIsIntersecting(entry.isIntersecting);
           },
-          { rootMargin: "-30%" }
+          { rootMargin: "-20%" }
         );
         console.log(isIntersecting);
         observer.observe(ref.current);
