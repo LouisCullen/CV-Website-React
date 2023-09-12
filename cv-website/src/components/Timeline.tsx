@@ -48,8 +48,8 @@ const timelineArray: position[] = [
     {
         company: "Diebold Nixdorf",
         role: "Shadow Cloud Architect",
-        startDate: new Date(2023, 4, 1),
-        endDate: new Date(2023, 10, 1),
+        startDate: new Date(2021, 4, 1),
+        endDate: new Date(2021, 10, 1),
         details: [
             "Worked with a senior cloud architect to see how cloud services are utilised in financial transactions",
             "Encountered CI/CD technologies such as Jenkins and Terraform",
