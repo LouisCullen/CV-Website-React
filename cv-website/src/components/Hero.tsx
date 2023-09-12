@@ -20,7 +20,7 @@ const Hero = () => {
                 scrollSnapAlign: "center",
                 padding: 0,
                 paddingTop: "10vh",
-                background: "linear-gradient(to bottom, #272c36, #353b48 7%)", 
+                background: "linear-gradient(to bottom, #272c36, #353b48)", 
                 paddingBottom: "10vw",
                 minHeight: "80vh"
             }}
@@ -64,7 +64,7 @@ const Hero = () => {
                         // boxShadow: "rgba(0, 0, 0, 0.7) 5px 5px 5px 0px"
                     }}
                 />
-                <img 
+                {/* <img 
                     src={require("../images/profile.jpeg")} 
                     alt="profile" 
                     style={{ 
@@ -79,7 +79,7 @@ const Hero = () => {
                         filter: "blur(min(10vw, 50px))",
                         // boxShadow: "rgba(0, 0, 0, 0.7) 5px 5px 5px 0px"
                     }}
-                />
+                /> */}
             </div>
         </Container>
     )

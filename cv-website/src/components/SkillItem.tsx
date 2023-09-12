@@ -1,5 +1,5 @@
 import { useWindowSize } from "@uidotdev/usehooks";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface popover {
     name: string;
@@ -9,7 +9,6 @@ interface popover {
 interface internalProps {
     icon: JSX.Element;
     popover: popover;
-    globalPopover: string | null;
     setPopover: any;
     height: string;
     width: string;
@@ -22,7 +21,6 @@ interface internalProps {
 const SkillItemInternals = ({
     icon,
     popover,
-    globalPopover,
     setPopover,
     height,
     width,
@@ -52,7 +50,8 @@ const SkillItemInternals = ({
                     position: "relative",
                     flexShrink: 0,
                     padding: (iconCover === "40%") ? "5%" : 0,
-                    width: iconCover
+                    width: iconCover,
+                    color: "#bdc3c7"
                 }}
                 onClick={() => {
                     setPopover(popover.name);
@@ -74,7 +73,7 @@ const SkillItemInternals = ({
                     marginLeft: mobile ? "2%" : 0
                 }}
             >
-                <h2 style={{ fontWeight: "bold" }}>{popover.name}</h2>
+                <h2 className="skill-name" style={{ fontWeight: "bold", color: "#9204e8 !important" }}>{popover.name}</h2>
                 <ul style={{ textAlign: "center", listStylePosition: "inside", padding: 0, margin: 0, overflow: "hidden", whiteSpace: "nowrap" }}>
                     {popover.uses.map((use, index) => 
                         <li key={index}>{use}</li>
@@ -136,7 +135,7 @@ const SkillItem = ({
             //     setOrder(0);
             // }, 1000);
         }
-    }, [globalPopover, mobile]);
+    }, [globalPopover, mobile, popover.name]);
 
     return (
         mobile ? (
@@ -153,7 +152,6 @@ const SkillItem = ({
                 <SkillItemInternals
                     icon={icon}
                     popover={popover}
-                    globalPopover={globalPopover}
                     setPopover={setPopover}
                     height={height}
                     width={width}
@@ -167,7 +165,6 @@ const SkillItem = ({
             <SkillItemInternals
                 icon={icon}
                 popover={popover}
-                globalPopover={globalPopover}
                 setPopover={setPopover}
                 height={height}
                 width={width}

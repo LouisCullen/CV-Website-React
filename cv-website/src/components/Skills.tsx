@@ -1,10 +1,16 @@
 import { Container } from "react-bootstrap";
 import { FaAws, FaBootstrap, FaCss3Alt, FaJava, FaJenkins, FaJs, FaNode, FaPython, FaReact } from "react-icons/fa";
 import SkillItem from "./SkillItem";
-import { useEffect, useState } from "react";
-import { useWindowSize } from "@uidotdev/usehooks";
+import { useState } from "react";
+import { IconType } from "react-icons";
 
-const skillsArray = [
+export interface skill {
+    icon: IconType;
+    name: string;
+    uses: string[];
+}
+
+const skillsArray: skill[] = [
     {
         icon: FaReact,
         name: "React",
@@ -92,7 +98,7 @@ const Skills = () => {
                 alignItems: "center",
                 display: "flex",
                 position: "relative",
-                paddingBottom: "25vh",
+                paddingBottom: "10vh",
                 maxWidth: "1200px",
                 flexDirection: "column"
             }}
