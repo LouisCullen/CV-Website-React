@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import { FaAws, FaBootstrap, FaCss3Alt, FaJava, FaJenkins, FaJs, FaNode, FaPython, FaReact } from "react-icons/fa";
 import SkillItem from "./SkillItem";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IconType } from "react-icons";
 
 export interface skill {
@@ -92,8 +92,32 @@ const skillsArray: skill[] = [
 const Skills = () => {
     const [popover, setPopover] = useState<string|null>(null);
 
+    const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
+    const [visible, setVisible] = useState<boolean>(false);
+    const ref = useRef<any>(null);
+    
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            setIsIntersecting(entry.isIntersecting);
+          },
+          { rootMargin: "-30%" }
+        );
+        console.log(isIntersecting);
+        observer.observe(ref.current);
+        return () => observer.disconnect();
+      }, []);
+
+      useEffect(() => {
+        if (isIntersecting) {
+            setVisible(true);
+        }
+        console.log(isIntersecting);
+      }, [isIntersecting]);
+
     return (
         <Container
+            
             style={{ 
                 alignItems: "center",
                 display: "flex",
@@ -104,14 +128,20 @@ const Skills = () => {
             }}
         >
             <h1 style={{ width: "100%", textAlign: "left", fontWeight: "bold", borderBottom: "2px solid" }}>Skills</h1>
-            <div style={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "center",
-                width: "100%",
-                paddingTop: "5vh"
-            }}>
+            <div 
+                ref={ref}
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                    width: "100%",
+                    paddingTop: "5vh",
+                    opacity: visible ? 100 : 0,
+                    transitionDuration: "1.5s",
+                    transitionTimingFunction: "ease-in-out"
+                }}
+            >
                 {skillsArray.map((skill, i) => 
                     <SkillItem
                         key={i}
