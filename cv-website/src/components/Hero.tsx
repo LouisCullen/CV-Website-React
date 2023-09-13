@@ -1,14 +1,25 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 
-const Hero = () => {
+interface props {
+    navbarHeight: number;
+}
+
+const Hero = ({ navbarHeight }: props) => {
     const [transition, setTransition] = useState<boolean>(false);
 
     useEffect(() => {
         setTimeout(() => {
+            window.scrollTo(0, 0);
+        }, 200);
+        setTimeout(() => {
             setTransition(true);
-        }, 1000);        
+        }, 800);        
     }, []);
+
+    useEffect(() => {
+        console.log(navbarHeight);
+    }, [navbarHeight])
 
     return(
         <Container 
@@ -17,20 +28,36 @@ const Hero = () => {
                 display: "flex", 
                 alignItems: "center", 
                 justifyContent: "center", 
-                scrollSnapAlign: "center",
                 padding: 0,
-                paddingTop: "10vh",
                 background: "linear-gradient(to bottom, #272c36, #353b48)", 
-                paddingBottom: "10vw",
-                minHeight: "80vh"
+                // paddingBottom: "10vw",
+                height: "100vh",
+                position: "relative",
+                top: navbarHeight,
+                scrollSnapAlign: "center"
             }}
         >
-            <div style={{ maxHeight: "600px", height: "100vw", maxWidth: "1000px", width: "100%", position: "relative" }}>
+            <div style={{ maxHeight: "600px", height: "100vw", maxWidth: "1000px", width: "100%", position: "relative", display: "flex", alignItems: "center" }}>
+
+                <img 
+                    src={require("../images/profile.jpeg")} 
+                    alt="profile" 
+                    style={{ 
+                        maxHeight: "100%", 
+                        maxWidth: "100%",
+                        opacity: transition ? 100 : 0,
+                        transitionDuration: "1s",
+                        transitionTimingFunction: "ease-in-out",
+                        zIndex: 1,
+                        // position: "absolute",
+                        // top: 0,
+                        // left: 0
+                    }}
+                />
                 <div
                     style={{
                         position: "absolute",
                         right: 0,
-                        top: "25%",
                         textAlign: "right",
                         display: "flex",
                         alignItems: "center",
@@ -48,21 +75,6 @@ const Hero = () => {
                 >
                     <h1><b>I'm Louis, a junior Software Developer based in Manchester/London</b></h1>
                 </div>
-                <img 
-                    src={require("../images/profile.jpeg")} 
-                    alt="profile" 
-                    style={{ 
-                        maxHeight: "100%", 
-                        maxWidth: "100%",
-                        opacity: transition ? 100 : 0,
-                        transitionDuration: "1s",
-                        transitionTimingFunction: "ease-in-out",
-                        zIndex: 1,
-                        position: "absolute",
-                        top: 0,
-                        left: 0
-                    }}
-                />
             </div>
         </Container>
     )

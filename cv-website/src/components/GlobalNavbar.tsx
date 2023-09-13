@@ -1,18 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import { FaBars, FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
 
-const GlobalNavbar = () => {
+const GlobalNavbar = ({ setNavbarHeight }: any) => {
     const [transition, setTransition] = useState<boolean>(false);
+    const navbarRef = useRef<any>(null);
 
     useEffect(() => {
         setTimeout(() => {
             setTransition(true);
+            setNavbarHeight(-navbarRef.current.clientHeight);
         }, 1000);        
     }, []);
     
     return (
         <Navbar 
+            ref={navbarRef}
             expand='lg' 
             sticky='top' 
             style={{ 

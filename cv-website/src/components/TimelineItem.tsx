@@ -1,4 +1,4 @@
-import { FaCircle } from "react-icons/fa";
+import { FaBars, FaCircle, FaPlay } from "react-icons/fa";
 import { position } from "./Timeline";
 import { useEffect, useRef, useState } from "react";
 
@@ -38,16 +38,17 @@ const TimelineItem = ({
                 position: "relative", 
                 display: "flex", 
                 flexDirection: "column",
-                paddingBottom: viewed ? "2em" : "30em", 
+                paddingTop: "2rem",
+                paddingBottom: viewed ? "3em" : "30em", 
                 alignItems: "start", 
                 top: viewed ? "0px" : "40vh", 
                 borderLeft: `5px solid ${viewed ? "#c44df0" : "#bdc3c7"}`,
                 transitionDuration: "1s",
-                left: "-5px"
+                left: "-5px",
             }} 
             ref={ref}
         >
-            <FaCircle style={{ position: "absolute", left: -10, color: viewed ? "#c44df0" : "#bdc3c7", transitionDuration: "1s" }}/>
+            <FaPlay style={{ position: "absolute", left: -5, color: viewed ? "#c44df0" : "#bdc3c7", transitionDuration: "1s" }}/>
             <div style={{ display: "flex", }}>
                 <div style={{ paddingLeft: "1em", paddingRight: "1vw", display: "flex", alignItems: "center" }}>
                     <p style={{ margin: 0 }}>

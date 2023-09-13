@@ -1,4 +1,5 @@
 import { useWindowSize } from "@uidotdev/usehooks";
+import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 
 interface popover {
@@ -89,13 +90,15 @@ interface props {
     popover: popover;
     globalPopover: string | null;
     setPopover: any;
+    variants: any;
 }
 
 const SkillItem = ({
     icon,
     popover,
     globalPopover,
-    setPopover
+    setPopover,
+    variants
 }: props) => {
     const [height, setHeight] = useState<string>("min(200px,18vw)");
     const [width, setWidth] = useState<string>("min(200px,18vw)");
@@ -139,7 +142,8 @@ const SkillItem = ({
 
     return (
         mobile ? (
-            <div
+            <motion.div
+            variants={variants}
             style={{
                 maxHeight: height,
                 maxWidth: width,
@@ -160,7 +164,7 @@ const SkillItem = ({
                     justifyContent={justifyContent}
                     mobile={mobile}
                 />
-            </div>
+            </motion.div>
         ) : (
             <SkillItemInternals
                 icon={icon}

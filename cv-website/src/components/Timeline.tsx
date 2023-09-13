@@ -1,5 +1,6 @@
 import { Container } from "react-bootstrap";
 import TimelineItem from "./TimelineItem";
+import { useRef } from "react";
 
 export interface position {
     company: string;
@@ -67,33 +68,57 @@ const Timeline = () => {
                 position: "relative",
                 paddingBottom: "25vh",
                 maxWidth: "1200px",
-                flexDirection: "column"
+                flexDirection: "column",
+                scrollSnapAlign: "start",
+                paddingTop: "2rem"
             }}
         >
-            <h1 style={{ width: "100%", textAlign: "left", fontWeight: "bold", borderBottom: "2px solid" }}>My journey</h1>
-            <div style={{
-                display: "flex",
-                flexDirection: "column",
-                flexWrap: "wrap",
-                justifyContent: "center",
-                marginTop: "10vh",
-                borderLeft: "5px solid #bdc3c7",
-            }}>
-                {timelineArray.map((position, i) => 
-                    <TimelineItem 
-                        position={position}
-                        // placement={(new Date().getDate() - timelineArray[timelineArray.length-1].endDate.getDate())}
-                    />
-                )}
-                {/* {skillsArray.map((skill, i) => 
-                    <SkillItem
-                        key={i}
-                        icon={<skill.icon style={{ width: "100%", height: "100%", cursor: "pointer" }} />}
-                        popover={{ name: skill.name, uses: skill.uses }}
-                        globalPopover={popover}
-                        setPopover={setPopover}
-                    />
-                )} */}
+            <h1 style={{ width: "100%", textAlign: "left", fontWeight: "bold", borderBottom: "2px solid", marginBottom: "2rem" }}>My journey</h1>
+            <div
+                style={{
+                    position: "relative",
+                    height: "8vh",
+                    width: "100%",
+                    zIndex: 1,
+                    background: "linear-gradient(to bottom, rgba(53, 59, 72, 1), rgba(53, 59, 72, 0))"
+                }}
+            ></div>
+            <div
+                style={{
+                    overflowY: "scroll",
+                    overflowX: "hidden",
+                    height: "100vh",
+                    scrollbarWidth: "none",
+                    msOverflowStyle: "none",
+                    position: "relative",
+                    top: "-7.9vh"
+                }}
+            >
+                <div style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                    marginTop: "10vh",
+                    borderLeft: "5px solid #bdc3c7",
+                    
+                }}>
+                    {timelineArray.map((position, i) => 
+                        <TimelineItem 
+                            position={position}
+                            // placement={(new Date().getDate() - timelineArray[timelineArray.length-1].endDate.getDate())}
+                        />
+                    )}
+                    {/* {skillsArray.map((skill, i) => 
+                        <SkillItem
+                            key={i}
+                            icon={<skill.icon style={{ width: "100%", height: "100%", cursor: "pointer" }} />}
+                            popover={{ name: skill.name, uses: skill.uses }}
+                            globalPopover={popover}
+                            setPopover={setPopover}
+                        />
+                    )} */}
+                </div>
             </div>
         </Container>
     )

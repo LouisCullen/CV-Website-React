@@ -3,6 +3,7 @@ import { FaAws, FaBootstrap, FaCss3Alt, FaJava, FaJenkins, FaJs, FaNode, FaPytho
 import SkillItem from "./SkillItem";
 import { useEffect, useRef, useState } from "react";
 import { IconType } from "react-icons";
+import { motion, useInView } from "framer-motion";
 
 export interface skill {
     icon: IconType;
@@ -89,31 +90,27 @@ const skillsArray: skill[] = [
     },
 ]
 
+const itemVariants = {
+    visible: { 
+        opacity: 1, 
+        x: 0,
+        transition: {
+            type: "spring",
+            stiffness: 300,
+            damping: 24,
+            duration: 1000
+        }
+    },
+    hidden: { 
+        opacity: 0, 
+        x: -100 
+    }
+}
+
 const Skills = () => {
     const [popover, setPopover] = useState<string|null>(null);
-
-    const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
-    const [visible, setVisible] = useState<boolean>(false);
     const ref = useRef<any>(null);
-    
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            setIsIntersecting(entry.isIntersecting);
-          },
-          { rootMargin: "-20%" }
-        );
-        console.log(isIntersecting);
-        observer.observe(ref.current);
-        return () => observer.disconnect();
-      }, []);
-
-      useEffect(() => {
-        if (isIntersecting) {
-            setVisible(true);
-        }
-        console.log(isIntersecting);
-      }, [isIntersecting]);
+    const isInView = useInView(ref, { once: true });
 
     return (
         <Container
@@ -124,11 +121,14 @@ const Skills = () => {
                 position: "relative",
                 paddingBottom: "10vh",
                 maxWidth: "1200px",
-                flexDirection: "column"
+                flexDirection: "column",
+                scrollSnapAlign: "start",
+                height: "100vh",
+                paddingTop: "2rem"
             }}
         >
             <h1 style={{ width: "100%", textAlign: "left", fontWeight: "bold", borderBottom: "2px solid" }}>Skills</h1>
-            <div 
+            <motion.div 
                 ref={ref}
                 style={{
                     display: "flex",
@@ -137,9 +137,21 @@ const Skills = () => {
                     justifyContent: "center",
                     width: "100%",
                     paddingTop: "5vh",
-                    opacity: visible ? 100 : 0,
-                    transitionDuration: "1.5s",
-                    transitionTimingFunction: "ease-in-out"
+                    alignItems: "center",
+                    height: "100%"
+                    // opacity: visible ? 100 : 0,
+                    // transitionDuration: "1.5s",
+                    // transitionTimingFunction: "ease-in-out"
+                }}
+                animate={isInView ? "visible" : "hidden"}
+                variants={{
+                    visible: {
+                        transition: {
+                            delayChildren: 0.5,
+                            staggerChildren: 0.1
+                        }
+                    },
+                    hidden: {}
                 }}
             >
                 {skillsArray.map((skill, i) => 
@@ -149,9 +161,10 @@ const Skills = () => {
                         popover={{ name: skill.name, uses: skill.uses }}
                         globalPopover={popover}
                         setPopover={setPopover}
+                        variants={itemVariants}
                     />
                 )}
-            </div>
+            </motion.div>
         </Container>
     )
 }
