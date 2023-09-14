@@ -4,10 +4,18 @@ import GlobalNavbar from './components/GlobalNavbar';
 import Hero from './components/Hero';
 import Skills from './components/Skills';
 import Timeline from './components/Timeline';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useWindowSize } from '@uidotdev/usehooks';
 
 function App() {
   const [navbarHeight, setNavbarHeight] = useState(0);
+  const windowSize = useWindowSize();
+  const [mobile, setMobile] = useState(false);
+  
+  useEffect(() => {
+      if (!windowSize.width) return;
+      setMobile(windowSize.width < 800)
+  }, [windowSize.width]);
 
   return (
     <div className="App">
@@ -19,7 +27,8 @@ function App() {
         style={{ 
           background: "#353b48", 
           height: "100vh",
-          scrollSnapType: "y mandatory",
+          scrollSnapType: mobile ? "y mandatory" : "y proximity",
+          scrollBehaviour: "smooth",
           overflowY: "auto",
           scrollbarWidth: 0,
           overflowStyle: "none",
