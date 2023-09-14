@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import { FaAws, FaBootstrap, FaCss3Alt, FaJava, FaJenkins, FaJs, FaNode, FaPython, FaReact } from "react-icons/fa";
 import SkillItem from "./SkillItem";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { IconType } from "react-icons";
 import { motion, useInView } from "framer-motion";
 

@@ -1,6 +1,5 @@
 import { Container } from "react-bootstrap";
 import TimelineItem from "./TimelineItem";
-import { useRef } from "react";
 
 export interface position {
     company: string;
@@ -70,7 +69,6 @@ const Timeline = ({ navbarHeight }: props) => {
                 alignItems: "center",
                 display: "flex",
                 position: "relative",
-                // paddingBottom: "10vh",
                 maxWidth: "1200px",
                 flexDirection: "column",
                 scrollSnapAlign: "start",
@@ -82,7 +80,7 @@ const Timeline = ({ navbarHeight }: props) => {
             <div
                 style={{
                     position: "relative",
-                    maxHeight: "15vh",
+                    maxHeight: "5vh",
                     height: "100%",
                     width: "100%",
                     zIndex: 1,
@@ -97,7 +95,7 @@ const Timeline = ({ navbarHeight }: props) => {
                     scrollbarWidth: "none",
                     msOverflowStyle: "none",
                     position: "relative",
-                    marginTop: "-14vh",
+                    marginTop: "-4.99vh",
                     display: "flex",
                     flexDirection: "column"
                 }}
@@ -107,25 +105,16 @@ const Timeline = ({ navbarHeight }: props) => {
                     flexDirection: "column",
                     flexWrap: "wrap",
                     justifyContent: "center",
-                    marginTop: "10vh",
                     borderLeft: "5px solid #bdc3c7",
                     
                 }}>
-                    {timelineArray.map((position, i) => 
+                    {timelineArray.toReversed().map((position, i) => 
                         <TimelineItem 
                             position={position}
-                            // placement={(new Date().getDate() - timelineArray[timelineArray.length-1].endDate.getDate())}
+                            key={i}
+                            index={i}
                         />
                     )}
-                    {/* {skillsArray.map((skill, i) => 
-                        <SkillItem
-                            key={i}
-                            icon={<skill.icon style={{ width: "100%", height: "100%", cursor: "pointer" }} />}
-                            popover={{ name: skill.name, uses: skill.uses }}
-                            globalPopover={popover}
-                            setPopover={setPopover}
-                        />
-                    )} */}
                 </div>
             </div>
         </Container>

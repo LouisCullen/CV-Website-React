@@ -1,13 +1,15 @@
-import { FaBars, FaCircle, FaPlay } from "react-icons/fa";
+import { FaPlay } from "react-icons/fa";
 import { position } from "./Timeline";
 import { useEffect, useRef, useState } from "react";
 
 interface props {
     position: position;
+    index: number;
 }
 
 const TimelineItem = ({
     position,
+    index
 }: props) => {
     const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
     const [viewed, setViewed] = useState<boolean>(false);
@@ -20,7 +22,6 @@ const TimelineItem = ({
           },
           { rootMargin: "-5%" }
         );
-        console.log(isIntersecting);
         observer.observe(ref.current);
         return () => observer.disconnect();
       }, []);
@@ -38,8 +39,8 @@ const TimelineItem = ({
                 position: "relative", 
                 display: "flex", 
                 flexDirection: "column",
-                paddingTop: "2rem",
-                paddingBottom: viewed ? "3em" : "30em", 
+                paddingTop: index === 0 ? "calc(5vh + 2rem)" : (viewed ? "2rem" : "50em"),
+                paddingBottom: "3em", 
                 alignItems: "start", 
                 top: viewed ? "0px" : "40vh", 
                 borderLeft: `5px solid ${viewed ? "#c44df0" : "#bdc3c7"}`,
@@ -48,9 +49,9 @@ const TimelineItem = ({
             }} 
             ref={ref}
         >
-            <FaPlay style={{ position: "absolute", left: -5, color: viewed ? "#c44df0" : "#bdc3c7", transitionDuration: "1s" }}/>
             <div style={{ display: "flex", }}>
-                <div style={{ paddingLeft: "1em", paddingRight: "1vw", display: "flex", alignItems: "center" }}>
+                <div style={{ paddingLeft: "1em", paddingRight: "1vw", display: "flex", alignItems: "center", position: "relative" }}>
+                    <FaPlay style={{ position: "absolute", left: -5, color: viewed ? "#c44df0" : "#bdc3c7", transitionDuration: "1s" }}/>
                     <p style={{ margin: 0 }}>
                         {position.startDate.toLocaleDateString('en-GB', {year: "numeric", month: "short"})}
                         {position.endDate && (
