@@ -72,10 +72,8 @@ const GlobalNavbar = ({ setNavbarHeight }: any) => {
                             transitionTimingFunction: "ease-in"
                         }}
                     >
-                        <Nav.Link href="#projects" style= {{ color: "#bdc3c7" }}>Projects</Nav.Link>
-                        <Nav.Link href="#experience" style= {{ color: "#bdc3c7" }}>Experience</Nav.Link>
-                        <Nav.Link href="#education" style= {{ color: "#bdc3c7" }}>Education</Nav.Link>
-                        <Nav.Link href="#personal" style= {{ color: "#bdc3c7" }}>Personal</Nav.Link>
+                        <Nav.Link href="#skills" style= {{ color: "#bdc3c7" }}>Skills</Nav.Link>
+                        <Nav.Link href="#journey" style= {{ color: "#bdc3c7" }}>Journey</Nav.Link>
                     </Nav>
                     <Nav 
                         style={{ 

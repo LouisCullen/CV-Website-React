@@ -131,7 +131,11 @@ const Skills = ({ navbarHeight }: props) => {
                 paddingTop: -navbarHeight
             }}
         >
-            <h1 style={{ width: "100%", textAlign: "left", fontWeight: "bold", borderBottom: "2px solid", marginTop: "2rem" }}>Skills</h1>
+            
+            <h1 style={{ width: "100%", textAlign: "left", fontWeight: "bold", borderBottom: "2px solid", marginTop: "2rem" }}>
+                <a style={{ top: navbarHeight, position: "absolute" }} id="skills"></a>
+                Skills
+            </h1>
             <motion.div 
                 ref={ref}
                 style={{
