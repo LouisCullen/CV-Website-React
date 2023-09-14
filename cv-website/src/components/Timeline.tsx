@@ -70,7 +70,7 @@ const Timeline = ({ navbarHeight }: props) => {
                 alignItems: "center",
                 display: "flex",
                 position: "relative",
-                paddingBottom: "10vh",
+                // paddingBottom: "10vh",
                 maxWidth: "1200px",
                 flexDirection: "column",
                 scrollSnapAlign: "start",
