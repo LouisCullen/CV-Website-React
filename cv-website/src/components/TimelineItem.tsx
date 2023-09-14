@@ -1,6 +1,7 @@
 import { FaPlay } from "react-icons/fa";
 import { position } from "./Timeline";
 import { useEffect, useRef, useState } from "react";
+import { useInView } from "framer-motion";
 
 interface props {
     position: position;
@@ -11,27 +12,28 @@ const TimelineItem = ({
     position,
     index
 }: props) => {
-    const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
-    const [viewed, setViewed] = useState<boolean>(false);
+    // const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
+    // const [viewed, setViewed] = useState<boolean>(false);
     const ref = useRef<any>(null);
+    const viewed = useInView(ref, { once: true });
     
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            setIsIntersecting(entry.isIntersecting);
-          },
-          { rootMargin: "-5%" }
-        );
-        observer.observe(ref.current);
-        return () => observer.disconnect();
-      }, []);
+    // useEffect(() => {
+    //     const observer = new IntersectionObserver(
+    //       ([entry]) => {
+    //         setIsIntersecting(entry.isIntersecting);
+    //       },
+    //       { rootMargin: "-5%" }
+    //     );
+    //     observer.observe(ref.current);
+    //     return () => observer.disconnect();
+    //   }, []);
 
-      useEffect(() => {
-        if (isIntersecting) {
-          setViewed(true);
-        }
-        console.log(isIntersecting);
-      }, [isIntersecting]);
+    //   useEffect(() => {
+    //     if (isIntersecting) {
+    //       setViewed(true);
+    //     }
+    //     console.log(isIntersecting);
+    //   }, [isIntersecting]);
 
     return (
         <div 
@@ -39,10 +41,10 @@ const TimelineItem = ({
                 position: "relative", 
                 display: "flex", 
                 flexDirection: "column",
-                paddingTop: index === 0 ? "calc(5vh + 2rem)" : (viewed ? "2rem" : "50em"),
+                paddingTop: index === 0 ? "calc(5vh + 2rem)" : (viewed ? "2rem" : "50vh"),
                 paddingBottom: "3em", 
                 alignItems: "start", 
-                top: viewed ? "0px" : "40vh", 
+                top: viewed ? "0px" : "50vh", 
                 borderLeft: `5px solid ${viewed ? "#c44df0" : "#bdc3c7"}`,
                 transitionDuration: "1s",
                 left: "-5px",
