@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 
-interface props {
-    navbarHeight: number;
-}
-
-const Hero = ({ navbarHeight }: props) => {
+const Hero = () => {
     const [transition, setTransition] = useState<boolean>(false);
 
     useEffect(() => {
@@ -16,10 +12,6 @@ const Hero = ({ navbarHeight }: props) => {
             setTransition(true);
         }, 800);        
     }, []);
-
-    useEffect(() => {
-        console.log(navbarHeight);
-    }, [navbarHeight])
 
     return(
         <Container 
@@ -33,7 +25,6 @@ const Hero = ({ navbarHeight }: props) => {
                 // paddingBottom: "10vw",
                 height: "100vh",
                 position: "relative",
-                top: navbarHeight,
                 scrollSnapAlign: "center"
             }}
         >

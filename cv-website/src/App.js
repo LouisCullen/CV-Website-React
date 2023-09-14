@@ -19,20 +19,24 @@ function App() {
         style={{ 
           background: "#353b48", 
           height: "100vh",
-          scrollSnapType: "y proximity",
+          scrollSnapType: "y mandatory",
           overflowY: "auto",
           scrollbarWidth: 0,
           overflowStyle: "none",
           padding: 0,
-          paddingBottom: "10vh"
+          paddingBottom: "10vh",
+          position: "relative",
+          top: navbarHeight
         }}
       >
-        <Hero 
+        <Hero />
+        {/* <Hero /> */}
+        <Skills 
           navbarHeight={navbarHeight}
         />
-        {/* <Hero /> */}
-        <Skills />
-        <Timeline />
+        <Timeline 
+          navbarHeight={navbarHeight}
+        />
         <Container
           fluid
           style={{ height: "100vh" }}

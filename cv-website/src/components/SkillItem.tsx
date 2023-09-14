@@ -116,8 +116,8 @@ const SkillItem = ({
     useEffect(() => {
         if (!globalPopover) {
             setIconCover("100%");
-            setHeight("min(150px,15vw)");
-            setWidth("min(150px,15vw)");
+            setHeight("min(120px,15vw)");
+            setWidth("min(120px,15vw)");
             setPadding("max(30px, 3vw)");
             setJustifyContent("start");
             // setOrder(0);

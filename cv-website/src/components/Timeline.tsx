@@ -17,7 +17,7 @@ const timelineArray: position[] = [
         startDate: new Date(2023, 2, 1),
         endDate: new Date(),
         details: [
-            "Acted as primary developer on a ground-up job website",
+            "Acted as a primary developer on a ground-up job website",
             "Utilised UX research tools to increase signup conversion rate",
             "Worked under pressure to hotfix bugs soon after launch",
             "Discussed business plans to maximise early growth"
@@ -59,25 +59,31 @@ const timelineArray: position[] = [
     },
 ]
 
-const Timeline = () => {
+interface props {
+    navbarHeight: number;
+}
+
+const Timeline = ({ navbarHeight }: props) => {
     return (
         <Container
             style={{ 
                 alignItems: "center",
                 display: "flex",
                 position: "relative",
-                paddingBottom: "25vh",
+                paddingBottom: "10vh",
                 maxWidth: "1200px",
                 flexDirection: "column",
                 scrollSnapAlign: "start",
-                paddingTop: "2rem"
+                height: "100dvh",
+                paddingTop: -navbarHeight
             }}
         >
-            <h1 style={{ width: "100%", textAlign: "left", fontWeight: "bold", borderBottom: "2px solid", marginBottom: "2rem" }}>My journey</h1>
+            <h1 style={{ width: "100%", textAlign: "left", fontWeight: "bold", borderBottom: "2px solid", marginTop: "2rem", marginBottom: "2rem" }}>My journey</h1>
             <div
                 style={{
                     position: "relative",
-                    height: "8vh",
+                    maxHeight: "15vh",
+                    height: "100%",
                     width: "100%",
                     zIndex: 1,
                     background: "linear-gradient(to bottom, rgba(53, 59, 72, 1), rgba(53, 59, 72, 0))"
@@ -87,11 +93,13 @@ const Timeline = () => {
                 style={{
                     overflowY: "scroll",
                     overflowX: "hidden",
-                    height: "100vh",
+                    height: "100%",
                     scrollbarWidth: "none",
                     msOverflowStyle: "none",
                     position: "relative",
-                    top: "-7.9vh"
+                    marginTop: "-14vh",
+                    display: "flex",
+                    flexDirection: "column"
                 }}
             >
                 <div style={{

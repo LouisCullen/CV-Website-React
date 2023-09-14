@@ -107,7 +107,11 @@ const itemVariants = {
     }
 }
 
-const Skills = () => {
+interface props {
+    navbarHeight: number;
+}
+
+const Skills = ({ navbarHeight }: props) => {
     const [popover, setPopover] = useState<string|null>(null);
     const ref = useRef<any>(null);
     const isInView = useInView(ref, { once: true });
@@ -123,11 +127,11 @@ const Skills = () => {
                 maxWidth: "1200px",
                 flexDirection: "column",
                 scrollSnapAlign: "start",
-                height: "100vh",
-                paddingTop: "2rem"
+                height: "100dvh",
+                paddingTop: -navbarHeight
             }}
         >
-            <h1 style={{ width: "100%", textAlign: "left", fontWeight: "bold", borderBottom: "2px solid" }}>Skills</h1>
+            <h1 style={{ width: "100%", textAlign: "left", fontWeight: "bold", borderBottom: "2px solid", marginTop: "2rem" }}>Skills</h1>
             <motion.div 
                 ref={ref}
                 style={{
@@ -138,7 +142,8 @@ const Skills = () => {
                     width: "100%",
                     paddingTop: "5vh",
                     alignItems: "center",
-                    height: "100%"
+                    height: "100%",
+                    
                     // opacity: visible ? 100 : 0,
                     // transitionDuration: "1.5s",
                     // transitionTimingFunction: "ease-in-out"
