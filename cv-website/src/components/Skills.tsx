@@ -178,7 +178,8 @@ const Skills = ({ navbarHeight }: props) => {
                         variants={itemVariants}
                     />
                 )}
-                <div
+                <motion.div
+                    variants={itemVariants}
                     style={{
                         width: "100%",
                         display: "flex",
@@ -368,7 +369,7 @@ const Skills = ({ navbarHeight }: props) => {
                         
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </motion.div>
         </Container>
     )
