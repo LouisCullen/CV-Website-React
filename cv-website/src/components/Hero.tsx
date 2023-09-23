@@ -25,7 +25,8 @@ const Hero = () => {
                 // paddingBottom: "10vw",
                 height: "100vh",
                 position: "relative",
-                scrollSnapAlign: "center"
+                scrollSnapAlign: "center",
+                overflow: "hidden"
             }}
         >
             <div style={{ maxHeight: "600px", height: "100vw", maxWidth: "1000px", width: "100%", position: "relative", display: "flex", alignItems: "center" }}>

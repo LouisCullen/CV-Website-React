@@ -1,17 +1,17 @@
 import { Container } from "react-bootstrap";
 import { FaAws, FaBootstrap, FaCss3Alt, FaJava, FaJenkins, FaJs, FaNode, FaPython, FaReact } from "react-icons/fa";
 import SkillItem from "./SkillItem";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IconType } from "react-icons";
 import { motion, useInView } from "framer-motion";
 
-export interface skill {
+export interface skillInterface {
     icon: IconType;
     name: string;
     uses: string[];
 }
 
-const skillsArray: skill[] = [
+const skillsArray: skillInterface[] = [
     {
         icon: FaReact,
         name: "React",
@@ -67,8 +67,7 @@ const skillsArray: skill[] = [
         uses: [
             "7-month part-time role",
             "Internship",
-            "Personal projects",
-            "University projects"
+            "Personal + university projects",
         ]
     },
     {
@@ -112,9 +111,19 @@ interface props {
 }
 
 const Skills = ({ navbarHeight }: props) => {
-    const [popover, setPopover] = useState<string|null>(null);
+    const [next, setNext] = useState<skillInterface>(skillsArray[0]);
+    const [current, setCurrent] = useState<skillInterface>(skillsArray[0]);
+    const [transition, setTransition] = useState<boolean>(false);
     const ref = useRef<any>(null);
     const isInView = useInView(ref, { once: true });
+
+    useEffect(() => {
+        setTransition(true);
+        setTimeout(() => {
+            setCurrent(next);
+            setTransition(false);
+        }, 1100);
+    }, [next]);
 
     return (
         <Container
@@ -147,10 +156,7 @@ const Skills = ({ navbarHeight }: props) => {
                     paddingTop: "5vh",
                     alignItems: "center",
                     height: "100%",
-                    
-                    // opacity: visible ? 100 : 0,
-                    // transitionDuration: "1.5s",
-                    // transitionTimingFunction: "ease-in-out"
+                    containerType: "size",
                 }}
                 animate={isInView ? "visible" : "hidden"}
                 variants={{
@@ -166,13 +172,203 @@ const Skills = ({ navbarHeight }: props) => {
                 {skillsArray.map((skill, i) => 
                     <SkillItem
                         key={i}
-                        icon={<skill.icon style={{ width: "100%", height: "100%", cursor: "pointer" }} />}
-                        popover={{ name: skill.name, uses: skill.uses }}
-                        globalPopover={popover}
-                        setPopover={setPopover}
+                        skill={skill}
+                        globalPopover={next}
+                        setPopover={setNext}
                         variants={itemVariants}
                     />
                 )}
+                <div
+                    style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}
+                >
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-around",
+                            alignItems: "center",
+                            position: "relative",
+                            overflow: "hidden"
+                        }}
+                    >
+                        <div
+                            style={{
+                                position: "relative",
+                                width: "max(20cqh, 14cqw)", 
+                                height: "max(20cqh, 14cqw)",
+                                marginRight: "max(2cqh, 5cqh)",
+                                containerType: "size",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center"
+                            }}
+                        >
+                            <motion.div
+                                animate={transition ? "motion" : "static"}
+                                variants={{
+                                    motion: {
+                                        top: 0,
+                                        transition: {
+                                            type: "spring",
+                                            duration: "1s"
+                                        }
+                                    },
+                                    static: {
+                                        top: "-200cqh",
+                                        transition: {
+                                            duration: 0
+                                        }
+                                    }
+                                }}
+                                style={{
+                                    position: "absolute",
+                                    width: "90%", 
+                                    height: "90%", 
+                                }}
+                            >
+                                <next.icon 
+                                    style={{ 
+                                        width: "100%",
+                                        height: "100%",
+                                        cursor: "pointer", 
+                                        color: "#bdc3c7"
+                                    }}
+                                />
+                            </motion.div>
+                            <motion.div
+                                animate={transition ? "motion" : "static"}
+                                variants={{
+                                    motion: {
+                                        top: "200cqh",
+                                        transition: {
+                                            type: "spring",
+                                            duration: "1s"
+                                        }
+                                    },
+                                    static: {
+                                        top: 0,
+                                        transition: {
+                                            duration: 0
+                                        }
+                                    }
+                                }}
+                                style={{
+                                    position: "absolute",
+                                    width: "90%", 
+                                    height: "90%", 
+                                }}
+                            >
+                                <current.icon 
+                                    style={{ 
+                                        width: "100%",
+                                        height: "100%",
+                                        cursor: "pointer", 
+                                        color: "#bdc3c7"
+                                    }}
+                                />
+                            </motion.div>
+                        </div>
+                        <div
+                            style={{
+                                width: "max(26cqh, 22cqw)",
+                                height: "max(35cqh, 25cqw)",
+                                position: "relative",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                containerType: "size",
+                                overflow: "hidden"
+                            }}
+                        >
+                            <motion.div
+                                id="nextInfo"
+                                animate={transition ? "motion" : "static"}
+                                variants={{
+                                    motion: {
+                                        left: 0,
+                                        transition: {
+                                            type: "spring",
+                                            stiffness: 100,
+                                            damping: 20,
+                                            duration: "1s"
+                                        }
+                                    },
+                                    static: {
+                                        left: "200cqw",
+                                        transition: {
+                                            duration: 0
+                                        }
+                                    }
+                                }}
+                                style={{
+                                    width: "100%",
+                                    position: "absolute"
+                                }}
+                            >
+                                <h1
+                                    style={{
+                                        fontWeight: "bold"
+                                    }}
+                                >{next.name}</h1>
+                                <ul>
+                                    {next.uses.map((use, index) =>
+                                        <li
+                                            key={index}
+                                        >
+                                            {use}
+                                        </li>
+                                    )}
+                                </ul>
+                            </motion.div>
+                            <motion.div
+                                id="currentInfo"
+                                animate={transition ? "motion" : "static"}
+                                variants={{
+                                    motion: {
+                                        left: "-200cqw",
+                                        transition: {
+                                            type: "spring",
+                                            stiffness: 100,
+                                            damping: 20,
+                                            duration: "1s"
+                                        }
+                                    },
+                                    static: {
+                                        left: 0,
+                                        transition: {
+                                            duration: 0
+                                        }
+                                    }
+                                }}
+                                style={{
+                                    width: "100%",
+                                    position: "absolute"
+                                }}
+                            >
+                                <h1
+                                    style={{
+                                        fontWeight: "bold"
+                                    }}
+                                >{current.name}</h1>
+                                <ul>
+                                    {current.uses.map((use, index) =>
+                                        <li
+                                            key={index}
+                                        >
+                                            {use}
+                                        </li>
+                                    )}
+                                </ul>
+                            </motion.div>
+                        
+                        </div>
+                    </div>
+                </div>
             </motion.div>
         </Container>
     )
