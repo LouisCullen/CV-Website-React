@@ -40,6 +40,7 @@ function App() {
         <Hero />
         <Skills 
           navbarHeight={navbarHeight}
+          mobile={mobile}
         />
         <Timeline 
           navbarHeight={navbarHeight}
