@@ -52,6 +52,7 @@ const SkillItem = ({
                     onClick={() => {
                         if (globalPopover !== skill) setPopover(skill);
                     }}
+                    style={{ width: "100%", height: "100%" }}
                 >
                         <skill.icon style={{ width: "100%", height: "100%", cursor: "pointer" }} />
                 </motion.div>
