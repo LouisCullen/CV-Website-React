@@ -214,7 +214,7 @@ const Skills = ({ navbarHeight, mobile }: props) => {
                                 position: "relative",
                                 width: "max(20cqh, 14cqw)", 
                                 height: "max(20cqh, 14cqw)",
-                                marginRight: "max(2cqh, 5cqh)",
+                                marginLeft: "max(2cqh, 5cqh)",
                                 containerType: "size",
                                 display: "flex",
                                 justifyContent: "center",
