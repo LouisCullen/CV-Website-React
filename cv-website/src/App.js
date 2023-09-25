@@ -33,13 +33,11 @@ function App() {
           scrollbarWidth: 0,
           overflowStyle: "none",
           padding: 0,
-          paddingBottom: "10vh",
-          position: "relative",
-          top: navbarHeight
+          top: 0,
+          position: "fixed"
         }}
       >
         <Hero />
-        {/* <Hero /> */}
         <Skills 
           navbarHeight={navbarHeight}
         />

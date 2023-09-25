@@ -135,13 +135,22 @@ const Skills = ({ navbarHeight }: props) => {
                 paddingBottom: "10vh",
                 maxWidth: "1200px",
                 flexDirection: "column",
-                scrollSnapAlign: "start",
+                scrollSnapAlign: "center",
                 height: "100dvh",
                 paddingTop: -navbarHeight
             }}
         >
             
-            <h1 style={{ width: "100%", textAlign: "left", fontWeight: "bold", borderBottom: "2px solid", marginTop: "2rem" }}>
+            <h1 
+                style={{ 
+                    width: "100%", 
+                    textAlign: "left", 
+                    fontWeight: "bold", 
+                    borderBottom: "2px solid", 
+                    marginTop: "2rem", 
+                    marginBottom: "2rem"
+                }}
+            >
                 <a style={{ top: navbarHeight, position: "absolute" }} id="skills"></a>
                 Skills
             </h1>
