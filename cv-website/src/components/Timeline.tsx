@@ -102,6 +102,17 @@ const Timeline = ({ navbarHeight }: props) => {
             ></div>
             <div
                 style={{
+                    position: "absolute",
+                    bottom: "0",
+                    maxHeight: "5vh",
+                    height: "100%",
+                    width: "100%",
+                    zIndex: 1,
+                    background: "linear-gradient(to top, rgba(53, 59, 72, 1) 20%, rgba(53, 59, 72, 0))"
+                }}
+            ></div>
+            <div
+                style={{
                     overflowY: "scroll",
                     overflowX: "hidden",
                     height: "100%",
@@ -110,7 +121,8 @@ const Timeline = ({ navbarHeight }: props) => {
                     position: "relative",
                     marginTop: "-4.99vh",
                     display: "flex",
-                    flexDirection: "column"
+                    flexDirection: "column",
+                    paddingBottom: "5vh"
                 }}
             >
                 <div style={{

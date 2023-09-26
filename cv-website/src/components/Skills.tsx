@@ -219,7 +219,8 @@ const Skills = ({ navbarHeight, mobile }: props) => {
                                 containerType: "size",
                                 display: "flex",
                                 justifyContent: "center",
-                                alignItems: "center"
+                                alignItems: "center",
+                                overflow: "hidden"
                             }}
                         >
                             <motion.div
@@ -249,8 +250,7 @@ const Skills = ({ navbarHeight, mobile }: props) => {
                                 <next.icon 
                                     style={{ 
                                         width: "100%",
-                                        height: "100%",
-                                        cursor: "pointer", 
+                                        height: "100%", 
                                         color: "#bdc3c7"
                                     }}
                                 />
@@ -283,7 +283,6 @@ const Skills = ({ navbarHeight, mobile }: props) => {
                                     style={{ 
                                         width: "100%",
                                         height: "100%",
-                                        cursor: "pointer", 
                                         color: "#bdc3c7"
                                     }}
                                 />
