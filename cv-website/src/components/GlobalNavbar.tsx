@@ -85,9 +85,9 @@ const GlobalNavbar = ({ setNavbarHeight }: any) => {
                             transitionTimingFunction: "ease-in"
                         }}
                     >
-                        <Nav.Link><FaGithub href="https://github.com/LouisCullen" style= {{ color: "#bdc3c7", marginLeft: "15px" }} fontSize="25px"/></Nav.Link>
-                        <Nav.Link><FaEnvelope href="mailto: cullen_louis@icloud.com" style= {{ color: "#bdc3c7", marginLeft: "15px" }} fontSize="25px"/></Nav.Link>
-                        <Nav.Link><FaLinkedin href="https://www.linkedin.com/in/louis-cullen" style= {{ color: "#bdc3c7", marginLeft: "15px" }} fontSize="25px"/></Nav.Link>
+                        <Nav.Link href="https://github.com/LouisCullen"><FaGithub style= {{ color: "#bdc3c7", marginLeft: "15px" }} fontSize="25px"/></Nav.Link>
+                        <Nav.Link href="mailto: cullen_louis@icloud.com"><FaEnvelope style= {{ color: "#bdc3c7", marginLeft: "15px" }} fontSize="25px"/></Nav.Link>
+                        <Nav.Link href="https://www.linkedin.com/in/louis-cullen"><FaLinkedin style= {{ color: "#bdc3c7", marginLeft: "15px" }} fontSize="25px"/></Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
