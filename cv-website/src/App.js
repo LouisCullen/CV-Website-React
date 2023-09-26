@@ -26,7 +26,7 @@ function App() {
         fluid 
         style={{ 
           background: "#353b48", 
-          height: "100vh",
+          height: "100dvh",
           scrollSnapType: mobile ? "y mandatory" : "y proximity",
           scrollBehaviour: "smooth",
           overflowY: "auto",
