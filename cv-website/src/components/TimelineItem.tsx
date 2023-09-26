@@ -16,24 +16,6 @@ const TimelineItem = ({
     // const [viewed, setViewed] = useState<boolean>(false);
     const ref = useRef<any>(null);
     const viewed = useInView(ref, { once: true });
-    
-    // useEffect(() => {
-    //     const observer = new IntersectionObserver(
-    //       ([entry]) => {
-    //         setIsIntersecting(entry.isIntersecting);
-    //       },
-    //       { rootMargin: "-5%" }
-    //     );
-    //     observer.observe(ref.current);
-    //     return () => observer.disconnect();
-    //   }, []);
-
-    //   useEffect(() => {
-    //     if (isIntersecting) {
-    //       setViewed(true);
-    //     }
-    //     console.log(isIntersecting);
-    //   }, [isIntersecting]);
 
     return (
         <div 
@@ -41,16 +23,16 @@ const TimelineItem = ({
                 position: "relative", 
                 display: "flex", 
                 flexDirection: "column",
-                paddingTop: index === 0 ? "calc(5vh + 2rem)" : (viewed ? "2rem" : "50vh"),
-                paddingBottom: "3em", 
+                paddingTop: "3rem",
+                paddingBottom: "1em", 
                 alignItems: "start", 
-                top: viewed ? "0px" : "50vh", 
+                opacity: viewed ? 1 : 0,
                 borderLeft: `5px solid ${viewed ? "#c44df0" : "#bdc3c7"}`,
                 transitionDuration: "1s",
                 left: "-5px",
             }} 
-            ref={ref}
         >
+            <div ref={ref} style={{ position: "absolute", top: "110%" }}></div>
             <div style={{ display: "flex", }}>
                 <div style={{ paddingLeft: "1em", paddingRight: "1vw", display: "flex", alignItems: "center", position: "relative" }}>
                     <FaPlay style={{ position: "absolute", left: -5, color: viewed ? "#c44df0" : "#bdc3c7", transitionDuration: "1s" }}/>
