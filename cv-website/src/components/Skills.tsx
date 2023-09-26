@@ -92,17 +92,17 @@ const skillsArray: skillInterface[] = [
 const itemVariants = {
     visible: { 
         opacity: 1, 
-        x: 0,
+        transform: "translateX(0px)",
         transition: {
             type: "spring",
             stiffness: 300,
             damping: 24,
-            duration: 1000
+            duration: 500
         }
     },
     hidden: { 
         opacity: 0, 
-        x: -100 
+        transform: "translateX(-60px)"
     }
 }
 
@@ -114,15 +114,15 @@ interface props {
 const Skills = ({ navbarHeight, mobile }: props) => {
     const [next, setNext] = useState<skillInterface>(skillsArray[0]);
     const [current, setCurrent] = useState<skillInterface>(skillsArray[0]);
-    const [transition, setTransition] = useState<boolean>(false);
+    const [transitioning, setTransitioning] = useState<boolean>(false);
     const ref = useRef<any>(null);
     const isInView = useInView(ref, { once: true });
 
     useEffect(() => {
-        setTransition(true);
+        setTransitioning(true);
         setTimeout(() => {
             setCurrent(next);
-            setTransition(false);
+            setTransitioning(false);
         }, 1100);
     }, [next]);
 
@@ -173,7 +173,7 @@ const Skills = ({ navbarHeight, mobile }: props) => {
                     visible: {
                         transition: {
                             delayChildren: 0.5,
-                            staggerChildren: 0.1
+                            staggerChildren: 0.05
                         }
                     },
                     hidden: {}
@@ -186,6 +186,7 @@ const Skills = ({ navbarHeight, mobile }: props) => {
                         globalPopover={next}
                         setPopover={setNext}
                         variants={itemVariants}
+                        transitioning={transitioning}
                     />
                 )}
                 <motion.div
@@ -222,17 +223,18 @@ const Skills = ({ navbarHeight, mobile }: props) => {
                             }}
                         >
                             <motion.div
-                                animate={transition ? "motion" : "static"}
+                                animate={transitioning ? "motion" : "static"}
                                 variants={{
                                     motion: {
-                                        top: 0,
+                                        transform: "translateY(0cqh)",
                                         transition: {
                                             type: "spring",
+                                            damping: 12,
                                             duration: "1s"
                                         }
                                     },
                                     static: {
-                                        top: "-200cqh",
+                                        transform: "translateY(-200cqh)",
                                         transition: {
                                             duration: 0
                                         }
@@ -254,17 +256,18 @@ const Skills = ({ navbarHeight, mobile }: props) => {
                                 />
                             </motion.div>
                             <motion.div
-                                animate={transition ? "motion" : "static"}
+                                animate={transitioning ? "motion" : "static"}
                                 variants={{
                                     motion: {
-                                        top: "200cqh",
+                                        transform: "translateY(200cqh)",
                                         transition: {
                                             type: "spring",
+                                            damping: 12,
                                             duration: "1s"
                                         }
                                     },
                                     static: {
-                                        top: 0,
+                                        transform: "translateY(0cqh)",
                                         transition: {
                                             duration: 0
                                         }
@@ -301,19 +304,19 @@ const Skills = ({ navbarHeight, mobile }: props) => {
                         >
                             <motion.div
                                 id="nextInfo"
-                                animate={transition ? "motion" : "static"}
+                                animate={transitioning ? "motion" : "static"}
                                 variants={{
                                     motion: {
-                                        left: 0,
+                                        transform: "translateX(0)",
+                                        opacity: 1,
                                         transition: {
-                                            type: "spring",
-                                            stiffness: 100,
-                                            damping: 20,
-                                            duration: "1s"
+                                            ease: "easeOut",
+                                            duration: 0.3
                                         }
                                     },
                                     static: {
-                                        left: "200cqw",
+                                        transform: "translateX(75%)",
+                                        opacity: 0,
                                         transition: {
                                             duration: 0
                                         }
@@ -321,7 +324,9 @@ const Skills = ({ navbarHeight, mobile }: props) => {
                                 }}
                                 style={{
                                     width: "100%",
-                                    position: "absolute"
+                                    position: "absolute",
+                                    textAlign: "left",
+                                    paddingLeft: "20%"
                                 }}
                             >
                                 <h1
@@ -329,7 +334,7 @@ const Skills = ({ navbarHeight, mobile }: props) => {
                                         fontWeight: "bold"
                                     }}
                                 >{next.name}</h1>
-                                <ul>
+                                <ul style={{ padding: 0, margin: 0 }}>
                                     {next.uses.map((use, index) =>
                                         <li
                                             key={index}
@@ -341,19 +346,19 @@ const Skills = ({ navbarHeight, mobile }: props) => {
                             </motion.div>
                             <motion.div
                                 id="currentInfo"
-                                animate={transition ? "motion" : "static"}
+                                animate={transitioning ? "motion" : "static"}
                                 variants={{
                                     motion: {
-                                        left: "-200cqw",
+                                        transform: "translateX(-75%)",
+                                        opacity: 0,
                                         transition: {
-                                            type: "spring",
-                                            stiffness: 100,
-                                            damping: 20,
-                                            duration: "1s"
+                                            ease: "easeOut",
+                                            duration: 0.3
                                         }
                                     },
                                     static: {
-                                        left: 0,
+                                        transform: "translateX(0)",
+                                        opacity: 1,
                                         transition: {
                                             duration: 0
                                         }
@@ -361,7 +366,9 @@ const Skills = ({ navbarHeight, mobile }: props) => {
                                 }}
                                 style={{
                                     width: "100%",
-                                    position: "absolute"
+                                    position: "absolute",
+                                    textAlign: "left",
+                                    paddingLeft: "20%"
                                 }}
                             >
                                 <h1
@@ -369,7 +376,7 @@ const Skills = ({ navbarHeight, mobile }: props) => {
                                         fontWeight: "bold"
                                     }}
                                 >{current.name}</h1>
-                                <ul>
+                                <ul style={{ padding: 0, margin: 0 }}>
                                     {current.uses.map((use, index) =>
                                         <li
                                             key={index}

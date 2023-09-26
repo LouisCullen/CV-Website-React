@@ -9,13 +9,15 @@ interface props {
     globalPopover: skillInterface;
     setPopover: any;
     variants: any;
+    transitioning: boolean;
 }
 
 const SkillItem = ({
     skill,
     globalPopover,
     setPopover,
-    variants
+    variants,
+    transitioning
 }: props) => {
 
     return (
@@ -50,7 +52,7 @@ const SkillItem = ({
                         }
                     }}
                     onClick={() => {
-                        if (globalPopover !== skill) setPopover(skill);
+                        if ((globalPopover !== skill) && !transitioning) setPopover(skill);
                     }}
                     style={{ width: "100%", height: "100%" }}
                 >
