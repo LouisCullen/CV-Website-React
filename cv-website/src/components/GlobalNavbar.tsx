@@ -2,7 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import { FaBars, FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
 
-const GlobalNavbar = ({ setNavbarHeight }: any) => {
+interface props {
+    setNavbarHeight: any;
+    toggleNavbar: any;
+}
+
+const GlobalNavbar = ({ setNavbarHeight, toggleNavbar }: props) => {
     const [transition, setTransition] = useState<boolean>(false);
     const navbarRef = useRef<any>(null);
 
@@ -39,7 +44,7 @@ const GlobalNavbar = ({ setNavbarHeight }: any) => {
                         transitionTimingFunction: "ease-in-out",
                         display: "flex",
                         alignItems: "center",
-                        fontFamily: "lexend"
+                        fontFamily: "lexend, sans-serif"
                     }}
                 >
                     <h1 style={{ textAlign: "left", margin: 0, fontSize: "min(3rem, 5.5vw)" }}>Louis Cullen - Developer</h1>
@@ -53,6 +58,7 @@ const GlobalNavbar = ({ setNavbarHeight }: any) => {
                             transitionDelay: "1s",
                             transitionTimingFunction: "ease-in-out"
                         }} 
+                        onClick={() => toggleNavbar()}
                     />
                 </Navbar.Toggle>
                 <Navbar.Collapse 

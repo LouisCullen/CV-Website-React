@@ -21,7 +21,7 @@ const Hero = () => {
                 alignItems: "center", 
                 justifyContent: "center", 
                 padding: 0,
-                background: "linear-gradient(to bottom, #272c36 20%, #353b48)", 
+                // background: "linear-gradient(to bottom, #272c36 20%, #353b48)", 
                 // paddingBottom: "10vw",
                 height: "100dvh",
                 position: "relative",

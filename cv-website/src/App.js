@@ -9,8 +9,13 @@ import { useWindowSize } from '@uidotdev/usehooks';
 
 function App() {
   const [navbarHeight, setNavbarHeight] = useState(0);
+  const [navbarToggle, setNavbarToggle] = useState(false);
   const windowSize = useWindowSize();
   const [mobile, setMobile] = useState(false);
+
+  const toggleNavbar = () => {
+    setNavbarToggle(!navbarToggle);
+  };
   
   useEffect(() => {
       if (!windowSize.width) return;
@@ -18,9 +23,10 @@ function App() {
   }, [windowSize.width]);
 
   return (
-    <div className="App">
+    <div className="App" style={{ background: "#353b48", height: "100vh" }}>
       <GlobalNavbar 
         setNavbarHeight={setNavbarHeight}
+        toggleNavbar={toggleNavbar}
       />
       <Container 
         fluid 
@@ -29,12 +35,18 @@ function App() {
           height: "100dvh",
           scrollSnapType: mobile ? "y mandatory" : "y proximity",
           scrollBehaviour: "smooth",
-          overflowY: "auto",
+          overflowY: navbarToggle ? "hidden" : "auto",
           scrollbarWidth: 0,
           overflowStyle: "none",
           padding: 0,
           top: 0,
-          position: "fixed"
+          transform: navbarToggle ? "translateY(10%)" : "translateY(0%)",
+          position: "fixed",
+          scale: navbarToggle ? "0.8" : "1",
+          transitionDuration: "0.35s",
+          transitionTimingFunction: "ease",
+          pointerEvents: navbarToggle ? "none" : "all",
+          opacity: navbarToggle ? "0.5" : "1"
         }}
       >
         <Hero />
