@@ -23,7 +23,7 @@ const Hero = () => {
                 padding: 0,
                 background: "linear-gradient(to bottom, #272c36 20%, #353b48)", 
                 // paddingBottom: "10vw",
-                height: "100vh",
+                height: "100dvh",
                 position: "relative",
                 scrollSnapAlign: "center",
                 overflow: "hidden"
@@ -47,6 +47,7 @@ const Hero = () => {
                     }}
                 />
                 <div
+                    className="text-wrap-balance"
                     style={{
                         position: "absolute",
                         right: 0,
@@ -65,7 +66,7 @@ const Hero = () => {
                         transitionTimingFunction: "ease-in-out"
                     }}
                 >
-                    <h1><b>I'm Louis, a junior Software Developer based in Manchester/London</b></h1>
+                    <h1><b>I'm Louis, a Software Developer based in Manchester/London</b></h1>
                 </div>
             </div>
         </Container>

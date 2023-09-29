@@ -48,3 +48,17 @@ h2 {
   color: #c44df0 !important;
   font-weight: bold !important;
 }
+
+.nav-link, .navbar-brand {
+  color: #bdc3c7 !important;
+  filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.9) );
+  font-weight: bold !important;
+}
+
+.nav-link {
+  padding-top: 15% !important;
+}
+
+.text-wrap-balance {
+  text-wrap: balance;
+}

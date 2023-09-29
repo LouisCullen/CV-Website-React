@@ -19,12 +19,12 @@ const GlobalNavbar = ({ setNavbarHeight }: any) => {
             expand='lg' 
             sticky='top' 
             style={{ 
-                background: "linear-gradient(to bottom, #16181e, #272c36)",
+                background: "linear-gradient(to bottom, rgba(22, 24, 30, 1), rgba(22, 24, 30, 0) 60%)",
                 margin: 0,
                 alignItems: "center", 
                 padding: "10px"
             }}>
-            <Container fluid>
+            <Container fluid style={{ alignItems: "center" }}>
                 <Navbar.Brand 
                     href='#' 
                     className="navbar-brand brand justify-content-start" 
@@ -38,10 +38,11 @@ const GlobalNavbar = ({ setNavbarHeight }: any) => {
                         transitionDuration: "0.6s",
                         transitionTimingFunction: "ease-in-out",
                         display: "flex",
-                        alignItems: "center"
+                        alignItems: "center",
+                        fontFamily: "lexend"
                     }}
                 >
-                    <img src={require("../logo.png")} alt="Logo" style={{ maxWidth: "510px", width:"60vw" }}/>
+                    <h1 style={{ textAlign: "left", margin: 0, fontSize: "min(3rem, 5.5vw)" }}>Louis Cullen - Developer</h1>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarToggler" style={{ border: "none" }}>
                     <FaBars 
@@ -72,8 +73,8 @@ const GlobalNavbar = ({ setNavbarHeight }: any) => {
                             transitionTimingFunction: "ease-in"
                         }}
                     >
-                        <Nav.Link href="#skills" style= {{ color: "#bdc3c7" }}>Skills</Nav.Link>
-                        <Nav.Link href="#journey" style= {{ color: "#bdc3c7" }}>Journey</Nav.Link>
+                        <Nav.Link href="#skills">Skills</Nav.Link>
+                        <Nav.Link href="#journey">Journey</Nav.Link>
                     </Nav>
                     <Nav 
                         style={{ 
@@ -85,9 +86,9 @@ const GlobalNavbar = ({ setNavbarHeight }: any) => {
                             transitionTimingFunction: "ease-in"
                         }}
                     >
-                        <Nav.Link href="https://github.com/LouisCullen"><FaGithub style= {{ color: "#bdc3c7", marginLeft: "15px" }} fontSize="25px"/></Nav.Link>
-                        <Nav.Link href="mailto: cullen_louis@icloud.com"><FaEnvelope style= {{ color: "#bdc3c7", marginLeft: "15px" }} fontSize="25px"/></Nav.Link>
-                        <Nav.Link href="https://www.linkedin.com/in/louis-cullen"><FaLinkedin style= {{ color: "#bdc3c7", marginLeft: "15px" }} fontSize="25px"/></Nav.Link>
+                        <Nav.Link href="https://github.com/LouisCullen"><FaGithub style= {{ marginLeft: "15px" }} fontSize="25px"/></Nav.Link>
+                        <Nav.Link href="mailto: cullen_louis@icloud.com"><FaEnvelope style= {{ marginLeft: "15px" }} fontSize="25px"/></Nav.Link>
+                        <Nav.Link href="https://www.linkedin.com/in/louis-cullen"><FaLinkedin style= {{ marginLeft: "15px" }} fontSize="25px"/></Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -88,7 +88,7 @@ const Timeline = ({ navbarHeight }: props) => {
                 }}
             >
                 <a id="journey" style={{ top: navbarHeight, position: "absolute" }}></a>
-                My journey
+                Progression
             </h1>
             <div
                 style={{
