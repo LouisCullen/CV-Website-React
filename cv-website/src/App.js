@@ -23,7 +23,7 @@ function App() {
   }, [windowSize.width]);
 
   return (
-    <div className="App" style={{ background: "#353b48", height: "100vh" }}>
+    <div className="App" style={{ background: "#353b48", height: "100vh", width: "100vw", position: "fixed" }}>
       <GlobalNavbar 
         setNavbarHeight={setNavbarHeight}
         toggleNavbar={toggleNavbar}

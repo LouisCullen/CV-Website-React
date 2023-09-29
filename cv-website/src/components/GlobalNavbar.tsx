@@ -49,7 +49,7 @@ const GlobalNavbar = ({ setNavbarHeight, toggleNavbar }: props) => {
                 >
                     <h1 style={{ textAlign: "left", margin: 0, fontSize: "min(3rem, 5.5vw)" }}>Louis Cullen - Developer</h1>
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbarToggler" style={{ border: "none" }}>
+                <Navbar.Toggle aria-controls="navbarToggler" style={{ border: "none" }} onClick={() => toggleNavbar()}>
                     <FaBars 
                         style={{ 
                             color: "#ecf0f1",
@@ -58,7 +58,6 @@ const GlobalNavbar = ({ setNavbarHeight, toggleNavbar }: props) => {
                             transitionDelay: "1s",
                             transitionTimingFunction: "ease-in-out"
                         }} 
-                        onClick={() => toggleNavbar()}
                     />
                 </Navbar.Toggle>
                 <Navbar.Collapse 
