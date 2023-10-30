@@ -114,11 +114,13 @@ interface props {
 const Skills = ({ navbarHeight, mobile }: props) => {
     const [next, setNext] = useState<skillInterface>(skillsArray[0]);
     const [current, setCurrent] = useState<skillInterface>(skillsArray[0]);
+    const [radialCentre, setRadialCentre] = useState<[number, number]>([0,65]);
     const [transitioning, setTransitioning] = useState<boolean>(false);
     const ref = useRef<any>(null);
     const isInView = useInView(ref, { once: true });
 
     useEffect(() => {
+        setRadialCentre([Math.floor(Math.random()*100),Math.floor(Math.random()*100)])
         setTransitioning(true);
         setTimeout(() => {
             setCurrent(next);
@@ -204,10 +206,17 @@ const Skills = ({ navbarHeight, mobile }: props) => {
                     <div
                         style={{
                             flexGrow: mobile ? 1 : 0,
+                            marginTop: 20,
                             display: "flex",
                             alignItems: "center",
                             flexDirection: "row",
                             justifyContent: "center",
+                            borderRadius: "50px",
+                            // border: "1px solid #c44df0",
+                            background: `radial-gradient(circle, rgba(146,4,232,0.2) 0%, rgba(53,59,72,1) 80%)`,
+                            backgroundPosition: `${radialCentre[0]}% ${radialCentre[1]}%`,
+                            backgroundSize: "250% 250%",
+                            transitionDuration: "1s"
                         }}
                     >
                         <div

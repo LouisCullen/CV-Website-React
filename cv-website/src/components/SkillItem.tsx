@@ -36,7 +36,6 @@ const SkillItem = ({
                     variants={{
                         selected: {
                             scale: 2,
-                            color: "#9204e8",
                             transition: {
                                 type: "spring",
                                 duration: "1s"
@@ -44,7 +43,6 @@ const SkillItem = ({
                         },
                         deselected: {
                             scale: 1,
-                            color: "#bdc3c7",
                             transition: {
                                 type: "spring",
                                 duration: "1s"
@@ -54,7 +52,7 @@ const SkillItem = ({
                     onClick={() => {
                         if ((globalPopover !== skill) && !transitioning) setPopover(skill);
                     }}
-                    style={{ width: "100%", height: "100%" }}
+                    style={{ width: "100%", height: "100%", color: "#bdc3c7", }}
                 >
                         <skill.icon style={{ width: "100%", height: "100%", cursor: "pointer" }} />
                 </motion.div>
