@@ -4,14 +4,27 @@ import GlobalNavbar from './components/GlobalNavbar';
 import Hero from './components/Hero';
 import Skills from './components/Skills';
 import Timeline from './components/Timeline';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useWindowSize } from '@uidotdev/usehooks';
+import { useMotionValueEvent, useScroll } from 'framer-motion';
 
 function App() {
   const [navbarHeight, setNavbarHeight] = useState(0);
   const [navbarToggle, setNavbarToggle] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const windowSize = useWindowSize();
   const [mobile, setMobile] = useState(false);
+  const ref = useRef(null);
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    container: containerRef,
+    target: ref,
+    offset: ["start start", "end end"]
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    setScrollProgress(latest);
+  });
 
   const toggleNavbar = () => {
     setNavbarToggle(!navbarToggle);
@@ -27,8 +40,10 @@ function App() {
       <GlobalNavbar 
         setNavbarHeight={setNavbarHeight}
         toggleNavbar={toggleNavbar}
+        scrollProgress={scrollProgress}
       />
       <Container 
+        ref={containerRef}
         fluid 
         style={{ 
           background: "#353b48", 
@@ -49,18 +64,22 @@ function App() {
           opacity: navbarToggle ? "0.5" : "1"
         }}
       >
-        <Hero />
-        <Skills 
-          navbarHeight={navbarHeight}
-          mobile={mobile}
-        />
-        <Timeline 
-          navbarHeight={navbarHeight}
-        />
-        <Container
-          fluid
-          style={{ height: "100vh" }}
-        />
+        <div
+          ref={ref}
+          style={{
+            display: "flex",
+            flexDirection: "column"
+          }}
+        >
+          <Hero />
+          <Skills 
+            navbarHeight={navbarHeight}
+            mobile={mobile}
+          />
+          <Timeline 
+            navbarHeight={navbarHeight}
+          />
+        </div>
       </Container>
     </div>
   );

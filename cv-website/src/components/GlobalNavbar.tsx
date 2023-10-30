@@ -3,11 +3,12 @@ import { Container, Navbar, Nav } from 'react-bootstrap';
 import { FaBars, FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
 
 interface props {
-    setNavbarHeight: any;
-    toggleNavbar: any;
+    setNavbarHeight: React.Dispatch<React.SetStateAction<number>>;
+    toggleNavbar: () => void;
+    scrollProgress: number;
 }
 
-const GlobalNavbar = ({ setNavbarHeight, toggleNavbar }: props) => {
+const GlobalNavbar = ({ setNavbarHeight, toggleNavbar, scrollProgress }: props) => {
     const [transition, setTransition] = useState<boolean>(false);
     const navbarRef = useRef<any>(null);
 
@@ -16,7 +17,7 @@ const GlobalNavbar = ({ setNavbarHeight, toggleNavbar }: props) => {
             setTransition(true);
             setNavbarHeight(-navbarRef.current.clientHeight);
         }, 1000);        
-    }, []);
+    }, [setNavbarHeight]);
     
     return (
         <Navbar 
@@ -24,7 +25,7 @@ const GlobalNavbar = ({ setNavbarHeight, toggleNavbar }: props) => {
             expand='lg' 
             sticky='top' 
             style={{ 
-                background: "linear-gradient(to bottom, rgba(22, 24, 30, 1), rgba(22, 24, 30, 0) 60%)",
+                background: `linear-gradient(to bottom, rgba(22, 24, 30, 1), rgba(22, 24, 30, 0) 60%), linear-gradient(to right, rgba(146, 4, 232, 0.2), rgba(146, 4, 232, 0) ${Math.floor(scrollProgress*100)}%)`,
                 margin: 0,
                 alignItems: "center", 
                 padding: "10px"

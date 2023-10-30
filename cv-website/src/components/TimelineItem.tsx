@@ -1,6 +1,6 @@
 import { FaPlay } from "react-icons/fa";
 import { position } from "./Timeline";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useInView } from "framer-motion";
 
 interface props {
