@@ -40,13 +40,8 @@
   }
 }
 
-p, h1, h3, h4, ul {
+p, h1, h2, h3, h4, h5, ul {
   color: #bdc3c7 !important;
-}
-
-h2 {
-  color: #c44df0 !important;
-  font-weight: bold !important;
 }
 
 .nav-link, .navbar-brand {

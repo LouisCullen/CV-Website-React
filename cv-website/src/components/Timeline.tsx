@@ -1,9 +1,10 @@
 import { Container } from "react-bootstrap";
 import TimelineItem from "./TimelineItem";
+import { useState } from "react";
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight, FaArrowCircleRight } from "react-icons/fa";
 
 export interface position {
-    company: string;
-    role: string;
+    event: string;
     startDate: Date;
     endDate?: Date;
     details?: string[];
@@ -11,22 +12,8 @@ export interface position {
 
 const timelineArray: position[] = [
     {
-        company: "StartupGradJobs",
-        role: "Founding Engineer",
-        startDate: new Date(2023, 2, 1),
-        endDate: new Date(),
-        details: [
-            "Acted as a primary developer on a ground-up job website",
-            "Utilised UX research tools to increase signup conversion rate",
-            "Worked under pressure to hotfix bugs soon after launch",
-            "Discussed business plans to maximise early growth"
-        ]
-    },
-    {
-        company: "Pearson",
-        role: "Software Developer Intern",
+        event: "Started Pearson summer internship",
         startDate: new Date(2023, 5, 1),
-        endDate: new Date(2023, 7, 1),
         details: [
             "Negotiated with key stakeholders to develop an internal tooling web app",
             "Acted on user feedback to ensure the product met requirements",
@@ -35,8 +22,17 @@ const timelineArray: position[] = [
         ]
     },
     {
-        company: "Auto Trader",
-        role: "Work Experience",
+        event: "Joined StartupGradJobs",
+        startDate: new Date(2023, 2, 1),
+        details: [
+            "Acted as a primary developer on a ground-up job website",
+            "Utilised UX research tools to increase signup conversion rate",
+            "Worked under pressure to hotfix bugs soon after launch",
+            "Discussed business plans to maximise early growth"
+        ]
+    },
+    {
+        event: "Visited AutoTrader offices for work experience",
         startDate: new Date(2023, 3, 1),
         details: [
             "Held meetings across different departments to cover many disciplines",
@@ -46,10 +42,8 @@ const timelineArray: position[] = [
         ]
     },
     {
-        company: "Diebold Nixdorf",
-        role: "Shadow Cloud Architect",
+        event: "Shadowed senior cloud architect at Diebold Nixdorf",
         startDate: new Date(2021, 4, 1),
-        endDate: new Date(2021, 10, 1),
         details: [
             "Worked with a senior cloud architect to see how cloud services are utilised in financial transactions",
             "Encountered CI/CD technologies such as Jenkins and Terraform",
@@ -63,6 +57,8 @@ interface props {
 }
 
 const Timeline = ({ navbarHeight }: props) => {
+    const [current, setCurrent] = useState<number>(0);
+
     return (
         <Container
             style={{ 
@@ -92,55 +88,48 @@ const Timeline = ({ navbarHeight }: props) => {
             </h1>
             <div
                 style={{
+                    // overflow: "hidden",
+                    height: "100%",
                     position: "relative",
-                    maxHeight: "5vh",
-                    height: "100%",
-                    width: "100%",
-                    zIndex: 1,
-                    background: "linear-gradient(to bottom, rgba(53, 59, 72, 1), rgba(53, 59, 72, 0))"
-                }}
-            ></div>
-            <div
-                style={{
-                    position: "absolute",
-                    bottom: "0",
-                    maxHeight: "5vh",
-                    height: "100%",
-                    width: "100%",
-                    zIndex: 1,
-                    background: "linear-gradient(to top, rgba(53, 59, 72, 1) 20%, rgba(53, 59, 72, 0))"
-                }}
-            ></div>
-            <div
-                style={{
-                    overflowY: "scroll",
-                    overflowX: "hidden",
-                    height: "100%",
-                    scrollbarWidth: "none",
-                    msOverflowStyle: "none",
-                    position: "relative",
-                    marginTop: "-4.99vh",
-                    display: "flex",
-                    flexDirection: "column",
-                    paddingBottom: "5vh"
+                    width: "100%"
                 }}
             >
-                <div style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    flexWrap: "wrap",
-                    justifyContent: "center",
-                    borderLeft: "5px solid #bdc3c7",
-                    
-                }}>
-                    {timelineArray.toReversed().map((position, i) => 
-                        <TimelineItem 
-                            position={position}
-                            key={i}
-                            index={i}
-                        />
-                    )}
+                <div
+                    style={{
+                        color: "#bdc3c7",
+                        position: "absolute",
+                        fontSize: "3em",
+                        bottom: "2vh",
+                        right: "5vw"
+                    }}
+                >
+                    <FaArrowAltCircleLeft 
+                        onClick={() => setCurrent((current-1)%timelineArray.length)}
+                        style= {{
+                            opacity: current === 0 ? 0 : 1,
+                            pointerEvents: current === 0 ? "none" : "all",
+                            touchAction: current === 0 ? "none" : "all",
+                            cursor: "pointer"
+                        }}
+                    />
+                    <FaArrowAltCircleRight 
+                        onClick={() => setCurrent((current+1)%timelineArray.length)}
+                        style= {{
+                            opacity: current === timelineArray.length-1 ? 0 : 1,
+                            pointerEvents: current === timelineArray.length-1 ? "none" : "all",
+                            touchAction: current === timelineArray.length-1 ? "none" : "all",
+                            cursor: "pointer"
+                        }}
+                    />
                 </div>
+                {timelineArray.toReversed().map((position, i) => 
+                    <TimelineItem 
+                        position={position}
+                        current={current}
+                        key={i}
+                        index={i}
+                    />
+                )}
             </div>
         </Container>
     )
