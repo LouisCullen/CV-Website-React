@@ -51,6 +51,7 @@ function App() {
           scrollSnapType: mobile ? "y mandatory" : "y proximity",
           scrollBehaviour: "smooth",
           overflowY: navbarToggle ? "hidden" : "auto",
+          overflowX: "hidden",
           scrollbarWidth: 0,
           overflowStyle: "none",
           padding: 0,
