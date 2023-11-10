@@ -20,7 +20,7 @@ const TimelineItem = ({
     useEffect(() => {
         let currentRotation = rotation;
         if (current === index -1) currentRotation = (Math.random()*2-1)*45;
-        else if (current === index && !inView) currentRotation = -currentRotation/2;
+        else if (current === index && !inView) currentRotation = -currentRotation/4;
         setRotation(currentRotation);
         setInView(current >= index);
     }, [current]);
@@ -35,39 +35,56 @@ const TimelineItem = ({
         <div 
             style={{ 
                 position: "absolute", 
-                display: "flex", 
-                flexDirection: "column",
-                justifyContent: "center",
-                padding: "2em",
-                alignItems: "center", 
                 height: "60%",
                 width: "min(80%, 400px)",
-                transition: "box-shadow 1s, scale 1s, translate 1s ease-in-out, rotate 1s ease-out, transform linear 0.5s",
+                transition: "scale 1s, translate 1s ease-in-out, rotate 1s ease-out",
                 left: "50%",
                 top: "50%",
                 rotate: flipped ? "0deg" : `${rotation}deg`,
                 translate: current >= index ? "-50% -50%" : "300% -50%",
                 scale: current < index || flipped ? "1.5" : "1",
-                background: moreInfo ? "#293040" : `radial-gradient(circle at 30%, rgba(62,54,89,1) 0%, rgba(41,48,64,1) 50%)`,
-                borderRadius: "15px",
-                boxShadow: current < index ? "30px 30px 40px rgba(0,0,0,0.9)" : (moreInfo ? "-20px 20px 30px rgba(0,0,0,0.9)" : "2px 2px 5px rgba(0,0,0,0.9)"), //need to fix shadow direction
-                transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
+                background: "transparent",
                 cursor: moreInfo ? "pointer" : "auto",
                 pointerEvents: current > index ? "none" : "all",
-                touchAction: current > index ? "none" : "all"
+                touchAction: current > index ? "none" : "all",
+                zIndex: (index+1)*1000,
+                perspective: "1000px"
             }} 
             onClick={() => {if (flipped) setFlipped(false)}}
         >
-            {moreInfo ? (
-                <div style={{ marginTop: "1em", textAlign: "left", zIndex: "-1" , transform: "rotateY(180deg)" }}>
-                    <ul>
-                        {position.details?.map((detail, i) => 
-                            <li key={i}>{detail}</li>
-                        )}
-                    </ul>
-                </div>
-            ) : (
-                <div>
+            <div
+                style={{
+                    position: "absolute",
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "15px",
+                }}
+            ></div>
+            <div
+                style={{
+                    position: "relative",
+                    height: "100%",
+                    width: "100%",
+                    transformStyle: "preserve-3d",
+                    transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
+                    transition: "transform 0.75s",
+                }}
+            >
+                <div 
+                    style={{ 
+                        transformStyle: "preserve-3d",
+                        position: "absolute", 
+                        backfaceVisibility: "hidden",
+                        width: "100%",
+                        height: "100%",
+                        padding: "2em",
+                        boxSizing: "border-box",
+                        background: "radial-gradient(circle at 30%, rgba(62,54,89,1) 0%, rgba(41,48,64,1) 50%)",
+                        borderRadius: "15px",
+                        transition: "box-shadow 1s",
+                        boxShadow: current < index ? "30px 30px 40px rgba(0,0,0,0.9)" : "2px 2px 5px rgba(0,0,0,0.9)",
+                    }}
+                >
                     <div style={{ position: "absolute", right: "1em", top: "1em" }}>
                         <h3 style={{ margin: 0, fontWeight: "bold" }}>
                             {position.startDate.toLocaleDateString('en-GB', {year: "numeric", month: "short"})}
@@ -76,7 +93,17 @@ const TimelineItem = ({
                             )}
                         </h3>
                     </div>
-                    <h2 style={{ textAlign: "left" }}>{position.event} </h2>
+                    <h2 
+                        style={{ 
+                            textAlign: "left", 
+                            position: "absolute",
+                            top: "50%",
+                            left: "0",
+                            translate: "0 -50%",
+                            padding: "1em",
+                            boxSizing: "border-box"
+                        }}
+                    >{position.event} </h2>
                     <h5 
                         onClick={() => setFlipped(true)} 
                         style={{ 
@@ -89,7 +116,29 @@ const TimelineItem = ({
                         }}
                     >Read about it</h5>
                 </div>
-            )}
+                <div 
+                    style={{ 
+                        transformStyle: "preserve-3d",
+                        padding: "2em",
+                        textAlign: "left", 
+                        transform: "rotateY(180deg)", 
+                        position: "absolute", 
+                        backfaceVisibility: "hidden",
+                        width: "100%",
+                        height: "100%",
+                        background: "#293040",
+                        borderRadius: "15px",
+                        boxShadow: "20px 20px 30px rgba(0,0,0,0.9)",
+                        display: "flex",
+                        alignItems: "center"
+                    }}>
+                    <ul>
+                        {position.details?.map((detail, i) => 
+                            <li key={i}>{detail}</li>
+                        )}
+                    </ul>
+                </div>
+            </div>
         </div>
     )
 }
