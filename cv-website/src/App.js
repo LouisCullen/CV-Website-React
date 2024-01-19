@@ -1,52 +1,75 @@
-import { Container } from 'react-bootstrap';
-import './App.css';
-import GlobalNavbar from './components/GlobalNavbar';
-import Hero from './components/Hero';
-import Skills from './components/Skills';
-import Timeline from './components/Timeline';
-import { useState, useEffect, useRef } from 'react';
-import { useWindowSize } from '@uidotdev/usehooks';
-import { useMotionValueEvent, useScroll } from 'framer-motion';
+import { Container } from "react-bootstrap";
+import "./App.css";
+import GlobalNavbar from "./components/GlobalNavbar";
+import Hero from "./components/Hero";
+import Skills from "./components/Skills";
+import Timeline from "./components/Timeline";
+import { useState, useEffect, useRef } from "react";
+import { useWindowSize } from "@uidotdev/usehooks";
+import { useMotionValueEvent, useScroll } from "framer-motion";
 
 function App() {
   const [navbarHeight, setNavbarHeight] = useState(0);
   const [navbarToggle, setNavbarToggle] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [pageScrollProgress, setPageScrollProgress] = useState(0);
+  const [heroScrollProgress, setHeroScrollProgress] = useState(0);
   const windowSize = useWindowSize();
   const [mobile, setMobile] = useState(false);
-  const ref = useRef(null);
+  const pageRef = useRef(null);
+  const heroRef = useRef();
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
+
+  const { scrollYProgress: pageScrollYProgress } = useScroll({
     container: containerRef,
-    target: ref,
-    offset: ["start start", "end end"]
+    target: pageRef,
+    offset: ["start start", "end end"],
   });
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    setScrollProgress(latest);
+  const { scrollYProgress: heroScrollYProgress } = useScroll({
+    container: containerRef,
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  useMotionValueEvent(pageScrollYProgress, "change", (latest) => {
+    setPageScrollProgress(latest);
+  });
+
+  useMotionValueEvent(heroScrollYProgress, "change", (latest) => {
+    setHeroScrollProgress(latest);
   });
 
   const toggleNavbar = () => {
     setNavbarToggle(!navbarToggle);
   };
-  
+
   useEffect(() => {
-      if (!windowSize.width) return;
-      setMobile(windowSize.width < 800)
+    if (!windowSize.width) return;
+    setMobile(windowSize.width < 800);
   }, [windowSize.width]);
 
   return (
-    <div className="App" style={{ background: "#353b48", height: "100vh", width: "100vw", position: "fixed" }}>
-      <GlobalNavbar 
+    <div
+      className="App"
+      style={{
+        background: "#1a1d23",
+        height: "100vh",
+        width: "100vw",
+        position: "fixed",
+      }}
+    >
+      <GlobalNavbar
         setNavbarHeight={setNavbarHeight}
         toggleNavbar={toggleNavbar}
-        scrollProgress={scrollProgress}
+        pageScrollProgress={pageScrollProgress}
+        heroScrollProgress={heroScrollProgress}
       />
-      <Container 
+      <Container
         ref={containerRef}
-        fluid 
-        style={{ 
-          background: "#353b48", 
+        fluid
+        style={{
+          // background: "#353b48",
+          background: "#1a1d23",
           height: "100dvh",
           scrollSnapType: mobile ? "y mandatory" : "y proximity",
           scrollBehaviour: "smooth",
@@ -62,24 +85,19 @@ function App() {
           transitionDuration: "0.35s",
           transitionTimingFunction: "ease",
           pointerEvents: navbarToggle ? "none" : "all",
-          opacity: navbarToggle ? "0.5" : "1"
+          opacity: navbarToggle ? "0.5" : "1",
         }}
       >
         <div
-          ref={ref}
+          ref={pageRef}
           style={{
             display: "flex",
-            flexDirection: "column"
+            flexDirection: "column",
           }}
         >
-          <Hero />
-          <Skills 
-            navbarHeight={navbarHeight}
-            mobile={mobile}
-          />
-          <Timeline 
-            navbarHeight={navbarHeight}
-          />
+          <Hero ref={heroRef} scrollProgress={heroScrollProgress} />
+          <Skills navbarHeight={navbarHeight} mobile={mobile} />
+          <Timeline navbarHeight={navbarHeight} />
         </div>
       </Container>
     </div>

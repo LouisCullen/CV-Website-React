@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
+
 .App {
   text-align: center;
   font-family: helvetica;
-	background-color: #353b48;
-	box-sizing: border-box;
+  background-color: #353b48;
+  box-sizing: border-box;
 }
 
 .App-logo {
@@ -40,13 +42,20 @@
   }
 }
 
-p, h1, h2, h3, h4, h5, ul {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+ul {
   color: #bdc3c7 !important;
 }
 
-.nav-link, .navbar-brand {
+.nav-link,
+.navbar-brand {
   color: #bdc3c7 !important;
-  filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.9) );
+  filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.9));
   font-weight: bold !important;
 }
 
@@ -56,4 +65,19 @@ p, h1, h2, h3, h4, h5, ul {
 
 .text-wrap-balance {
   text-wrap: balance;
+}
+
+.heroText {
+  mix-blend-mode: color-dodge;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+}
+
+.heroText h1 {
+  font-size: max(5vw, 6vh);
+  line-height: 0.75em;
+}
+
+.heroText p {
+  font-size: max(2.5vw, 3.5vh);
 }
