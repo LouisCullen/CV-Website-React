@@ -59,6 +59,10 @@ ul {
   font-weight: bold !important;
 }
 
+.navbar-brand h1 {
+  font-family: "Montserrat", sans-serif;
+}
+
 .nav-link {
   padding-top: 15% !important;
 }
