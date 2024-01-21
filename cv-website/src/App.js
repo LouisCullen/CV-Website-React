@@ -2,11 +2,11 @@ import { Container } from "react-bootstrap";
 import "./App.css";
 import GlobalNavbar from "./components/GlobalNavbar";
 import Hero from "./components/Hero";
-import Skills from "./components/Skills";
 import Timeline from "./components/Timeline";
 import { useState, useEffect, useRef } from "react";
 import { useWindowSize } from "@uidotdev/usehooks";
 import { useMotionValueEvent, useScroll } from "framer-motion";
+import Projects from "./components/Projects";
 
 function App() {
   const [navbarHeight, setNavbarHeight] = useState(0);
@@ -96,7 +96,8 @@ function App() {
           }}
         >
           <Hero ref={heroRef} scrollProgress={heroScrollProgress} />
-          <Skills navbarHeight={navbarHeight} mobile={mobile} />
+          <Projects navbarHeight={navbarHeight} />
+          {/* <Skills navbarHeight={navbarHeight} mobile={mobile} /> */}
           <Timeline navbarHeight={navbarHeight} />
         </div>
       </Container>

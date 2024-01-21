@@ -1,59 +1,52 @@
 import { motion } from "framer-motion";
 import React from "react";
-import { skillInterface } from "./Skills";
+import { IconType } from "react-icons";
+
+export interface skillInterface {
+  icon: IconType;
+  name: string;
+}
 
 interface props {
   skill: skillInterface;
-  globalPopover: skillInterface;
-  setPopover: any;
+  active: boolean;
   variants: any;
-  transitioning: boolean;
 }
 
-const SkillItem = ({
-  skill,
-  globalPopover,
-  setPopover,
-  variants,
-  transitioning,
-}: props) => {
+const SkillItem = ({ skill, active, variants }: props) => {
   return (
     <motion.div
       variants={variants}
       style={{
-        height: "max(15cqh, 14cqw)",
-        width: "max(15cqh, 14cqw)",
+        height: "max(13cqh, 10cqw)",
+        width: "max(13cqh, 10cqw)",
         display: "flex",
         justifyContent: "center",
-        padding: "max(4cqh, 4cqw)",
+        padding: "max(4cqh, 3cqw)",
       }}
     >
       <motion.div
-        animate={globalPopover === skill ? "selected" : "deselected"}
+        animate={active ? "selected" : "deselected"}
         variants={{
           selected: {
             scale: 2,
+            color: "#a76ed8",
             transition: {
               type: "spring",
               duration: "1s",
             },
           },
           deselected: {
-            scale: 1,
+            scale: 1.3,
             transition: {
               type: "spring",
               duration: "1s",
             },
           },
         }}
-        onClick={() => {
-          if (globalPopover !== skill && !transitioning) setPopover(skill);
-        }}
         style={{ width: "100%", height: "100%", color: "#bdc3c7" }}
       >
-        <skill.icon
-          style={{ width: "100%", height: "100%", cursor: "pointer" }}
-        />
+        <skill.icon style={{ width: "100%", height: "100%" }} />
       </motion.div>
     </motion.div>
   );

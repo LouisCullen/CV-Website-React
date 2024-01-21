@@ -73,12 +73,8 @@ const Timeline = ({ navbarHeight }: props) => {
       }}
     >
       <h1
+        className="sectionTitle"
         style={{
-          width: "100%",
-          textAlign: "left",
-          fontWeight: "bold",
-          borderBottom: "2px solid",
-          marginTop: "2rem",
           marginBottom: "2rem",
         }}
       >
