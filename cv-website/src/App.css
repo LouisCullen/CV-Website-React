@@ -68,16 +68,18 @@ ul {
 }
 
 .heroText {
-  mix-blend-mode: color-dodge;
+  mix-blend-mode: difference;
+  filter: invert(1) hue-rotate(245deg) brightness(1.5);
   font-family: "Montserrat", sans-serif;
   font-weight: 900;
 }
 
 .heroText h1 {
-  font-size: max(5vw, 6vh);
+  font-size: max(10vw, 11vh);
   line-height: 0.75em;
+  letter-spacing: calc(-0.05 * max(10vw, 10vh));
 }
 
 .heroText p {
-  font-size: max(2.5vw, 3.5vh);
+  font-size: max(5vw, 4vh);
 }

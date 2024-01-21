@@ -34,9 +34,10 @@ const Hero = forwardRef<HTMLDivElement, props>(function (props, ref) {
     >
       <div
         style={{
-          maxHeight: transition ? "0" : "100vh",
-          transitionDuration: "1.5s",
-          transitionTimingFunction: "cubic-bezier(0.290, 1.155, 0.110, 0.960)",
+          maxHeight: transition ? "10px" : "100vh",
+          maxWidth: transition ? "0" : "100vw",
+          transition:
+            "max-height 1s ease, max-width 0.5s cubic-bezier(0.510, 0.155, 0.960, 0.495) 1.1s",
           height: "100%",
           width: "100%",
           background: "#171a1f",
@@ -51,7 +52,7 @@ const Hero = forwardRef<HTMLDivElement, props>(function (props, ref) {
           position: "absolute",
           zIndex: -1,
           objectFit: "cover",
-          filter: "blur(4px) brightness(100%)",
+          filter: "blur(5px) brightness(100%)",
           opacity: "10%",
           maskImage:
             "linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%)",
